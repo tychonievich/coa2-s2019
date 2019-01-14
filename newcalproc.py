@@ -389,11 +389,6 @@ def calendar(data):
         elif 'writeup' in tdat and 'base' in data['meta']: details['link'] = data['meta']['base'] + tdat['writeup']
         elif 'title' in tdat and 'base' in tdat:
             details['link'] = tdat['base'] + slugify(title)+'.html'
-        if 'files' in tdat: 
-            if type(tdat['files']) is not list:
-                details['files'] = list(tdat['files'])
-            else:
-                details['files'] = tdat['files']
         ans.append((start.timestamp(), details))
     
     # Exams
@@ -520,7 +515,110 @@ def toHtml(events, sections=None):
     body.append('</table>')
     body.extend(['<script>',buttonScript,'</script>'])
     return '\n'.join(body)
-    
+
+
+def assignments_json(data):
+    import collections
+    groups = data['assignments'].get('.groups', {})
+    ans = collections.OrderedDict()
+    for k,v in data['assignments'].items():
+        if k.startswith('.'): continue
+        if v is None: ans[k] = {}
+        else: ans[k] = {_k:_v for _k,_v in v.items() if not (_k.startswith('.') or _k in totaling_keys)}
+        if 'group' not in ans[k]:
+            for g in groups:
+                if k.startswith(g):
+                    ans[k]['group'] = g
+        for ex,val in groups.get(ans[k].get('group',''), {}).items():
+            if ex == '.tester-prefix' and 'files' in ans[k] and 'tester' not in ans[k]:
+                if type(ans[k]['files']) is str:
+                    ans[k]['tester'] = val + ans[k]['files']
+                elif len(ans[k]['files']) == 1:
+                    ans[k]['tester'] = val + ans[k]['files'][0]
+            if ex.startswith('.') or ex in totaling_keys or ex in ans[k]: continue
+            ans[k][ex] = val
+        if 'title' not in ans[k] and ans[k].get('group',None) == 'PA' and type(ans[k].get('files',None)) is str:
+            ans[k]['title'] = ans[k]['files']
+
+    # and quizzes
+    qid=0
+    for d in data.get('Quizzes', {}).get('dates',[]):
+        qid += 1
+        k = 'Q{:02d}'.format(qid)
+        ans[k] = {
+            'title':'Quiz {}'.format(qid),
+            'due':d,
+            'rubric':{'kind':'percentage'},
+            'group':'Quiz',
+            'link':data['Quizzes']['link'],
+        }
+    if d in [_.date() for _ in data['Quizzes']['dates']]:
+        today['quiz'] = '<a href="{}">Quiz due {}</a>'.format(
+            data['Quizzes']['link'],
+            [_.strftime('%R') for _ in data['Quizzes']['dates'] if _.date() == d][0],
+        )
+    # fix date and datetime (to be a str) for JSON export
+    for k,v in ans.items():
+        for k2 in v:
+            if isinstance(v[k2], datetime):
+                try: # 3.6 and beyond
+                    v[k2] = v[k2].isoformat(sep=' ', timespec='minutes')
+                except: # not yet 3.6
+                    v[k2] = v[k2].isoformat(sep=' ')[:4+1+2+1+2+1+2+1+2]
+            elif isinstance(v[k2], date):
+                if k2 == 'open':
+                    v[k2] = v[k2].isoformat() + ' 00:00'
+                else:
+                    v[k2] = v[k2].isoformat() + ' 23:59'
+    # sort by due date
+    keys = [(v.get('due','~'+k),k) for k,v in ans.items()]
+    keys.sort()
+    for _,k in keys:
+        ans.move_to_end(k)
+    return ans
+
+def coursegrade_json(data):
+    groups = data['assignments'].get('.groups', {})
+    weights, drops, inc, exc = {}, {}, {}, {}
+    for k,v in groups.items():
+        if 'portion' in v:
+            weights[k] = v['portion']
+        else:
+            weights[k] = 0
+        if type(weights[k]) is str:
+            try:
+                weights[k] = eval(weights[k].replace('%','/100'))
+            except: pass
+        if 'drop' in v:
+            drops[k] = v['drop']
+        if 'include' in v:
+            inc[k] = v['include']
+        if 'exclude' in v:
+            exc[k] = v['exclude']
+    for k,v in drops.items():
+        if type(v) is str:
+            v = eval(v.replace('%','/100'))
+        if v < 1:
+            cnt = 0
+            for k,v in assignments_json(data).items():
+                if v.get('group','') == k: cnt += 1
+            v *= cnt
+        drops[k] = int(round(v))
+    return {'letters':[
+        # {'A+':0.98},
+        {'A' :0.93},
+        {'A-':0.90},
+        {'B+':0.86},
+        {'B' :0.83},
+        {'B-':0.80},
+        {'C+':0.76},
+        {'C' :0.73},
+        {'C-':0.70},
+        {'D+':0.66},
+        {'D' :0.63},
+        {'D-':0.60},
+        {'F' :0.00},
+    ],'weights':weights,'drops':drops,'includes':inc,'excludes':exc}
 
 def yamlfile(f):
     global default_tz
