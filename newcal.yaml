@@ -33,7 +33,7 @@ sections:
 
 lectures:
     - welcome
-    - priviledge
+    - privilege
     - [interrupts, privilege]
     - interrupts
     - user accounts

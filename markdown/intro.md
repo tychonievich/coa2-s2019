@@ -6,7 +6,7 @@ In [COA1](../../COA1/) you learned a simple version of how processors work, and 
 
 Each of the topics this term is intricate enough to require focused exploration, which may make it easy to loose sight of how they are all interrelated. The remainder of this section is designed to be an overview of each of those topics and how they fit together.
 
-## Processors: idle = wasteful
+# Processors: idle = wasteful
 
 A processor has many specialized subsystems: adders and movers and multipliers and so on. Any given instruction typically only uses a subset of these, meaning most are idle. Idle transistors still take up space on the chip, still draw some power and generate some heat: they have cost.
 
@@ -20,7 +20,7 @@ Pipelining has several complications that assembly lines do not because the oper
 
 Since 2017, security exploits have been known that depend on information leakage from speculatively-executed instructions. At the time of writing^[January 2019] it is not yet clear to what degree these newly-discovered attack vectors will influence the design of future processors.
 
-## Caching: avoiding repetitive work
+# Caching: avoiding repetitive work
 
 If I ask you "What is thirty-seven times one hundred three?"
 you'll require a few seconds to reply.
@@ -48,7 +48,7 @@ that remain visible in the cache.
 We'll also discuss a bit about software caching and memoizing as a performance tool,
 though that is not a major topic of this course.
 
-## Virtual Memory: the illusion of isolation
+# Virtual Memory: the illusion of isolation
 
 When writing assembly, we have not had to worry about which regions of memory other processes are using, even though in practice it is common for computers to be running hundreds of different processes concurrently, each with code and data in memory. This is not just a convenience: we don't want other processes to be able to see the contents of our process's memory or else they could use that visibility to read passwords or other private data from us.
 
@@ -72,8 +72,18 @@ a. some optimization to make this close to as efficient as direct memory access.
 
 Virtual memory is only one of several functionalities that will require close cooperation between special privileged software (the kernel) and hardware in order to achieve desirable behaviors.
 
-## Interrupts: safe communication with hardware
+# Interrupts: safe communication with hardware
+
+What happens when you press a key on the keyboard?
+Clearly some electrical signal is sent to some part of the computer,
+but how does the computer detect that it happened?
+While it is possible to set up a polling-based system, where the program pauses every few milliseconds and checks to see if some key is being pressed or mouse moved or network packed collected,
+it is more common to use interrupts.
+
+Interrupts allow a signal on a wire entering the processor
+to change what code the processor is running, suspending your program
+and running an interrupt handler in the operating system.
 
 
 
-## Synchronization: concurrency requires coordination
+# Synchronization: concurrency requires coordination
