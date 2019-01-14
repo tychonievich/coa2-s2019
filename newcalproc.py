@@ -1,5 +1,5 @@
 from yaml import load
-import pytz, datetime, re, markdown, dateutil, unidecode
+import pytz, datetime, re, markdown, dateutil, unidecode, json
 
 calStyFill = '''
 .calendar { display: table; }
@@ -178,6 +178,72 @@ try:
     from yaml import CLoader as Loader
 except ImportError:
     from yaml import Loader
+
+def prettyjson(d, newlineindent=2, maxinline=79):
+    """The way I like to see JSON:
+    commas begin lines
+    short collections inline
+    no extra spaces"""
+    s = json.dumps(d, separators=(',',':'))
+    indent = 0
+    instr = False
+    def skipshort(start, maxlen):
+        """Given the starting index of a list or dict, returns either
+        the same index, if it is too long,
+        or the index of the last character of the list/dict"""
+        nest = 0
+        instr = False
+        i = start
+        comma = False
+        while i < len(s) and ((not comma) or (i < start+maxlen)):
+            if instr:
+                if s[i] == '\\': i+=1
+                elif s[i] == '"': instr = False
+            else:
+                if s[i] == '"': instr = True
+                elif s[i] in '[{': nest += 1
+                elif s[i] in ']}':
+                    nest -= 1
+                    if nest == 0: return i
+                elif s[i] == ',': comma = True
+            i += 1
+        return start
+    chunks = []
+    i=0
+    last=0
+    indents = []
+    while i < len(s):
+        if instr:
+            if s[i] == '\\': 
+                i+=1
+            elif s[i] == '"': instr = False
+        elif s[i] == '"': instr = True
+        else:
+            if s[i] in '[{':
+                end = skipshort(i, maxinline-(i-last)-indent)
+                if end > i: i = end
+                elif (i-last) < 8:
+                    indents.append(indent)
+                    indent += (i-last)
+                else:
+                    chunks.append(s[last:i])
+                    indents.append(indent)
+                    indent += newlineindent
+                    chunks.append('\n'+' '*indent)
+                    last = i
+            elif s[i] in ']}':
+                chunks.append(s[last:i])
+                chunks.append('\n'+' '*indent + s[i])
+                indent = indents.pop()
+                last = i+1
+            elif s[i] == ',':
+                chunks.append(s[last:i])
+                chunks.append('\n'+' '*indent)
+                last = i
+        i += 1
+    if last < i: chunks.append(' '*indent + s[last:i])
+    return ''.join(chunks)
+
 
 def fixworking():
     """change to this script's directory as the working directory"""
@@ -516,6 +582,9 @@ def toHtml(events, sections=None):
     body.extend(['<script>',buttonScript,'</script>'])
     return '\n'.join(body)
 
+totaling_keys = ('portion', 'drop', 'include', 'exclude')
+numgap = re.compile(r'([a-zA-Z])([0-9])')
+codeclass = re.compile(r'[{][.][^}]+[}]')
 
 def assignments_json(data):
     import collections
@@ -540,32 +609,15 @@ def assignments_json(data):
         if 'title' not in ans[k] and ans[k].get('group',None) == 'PA' and type(ans[k].get('files',None)) is str:
             ans[k]['title'] = ans[k]['files']
 
-    # and quizzes
-    qid=0
-    for d in data.get('Quizzes', {}).get('dates',[]):
-        qid += 1
-        k = 'Q{:02d}'.format(qid)
-        ans[k] = {
-            'title':'Quiz {}'.format(qid),
-            'due':d,
-            'rubric':{'kind':'percentage'},
-            'group':'Quiz',
-            'link':data['Quizzes']['link'],
-        }
-    if d in [_.date() for _ in data['Quizzes']['dates']]:
-        today['quiz'] = '<a href="{}">Quiz due {}</a>'.format(
-            data['Quizzes']['link'],
-            [_.strftime('%R') for _ in data['Quizzes']['dates'] if _.date() == d][0],
-        )
     # fix date and datetime (to be a str) for JSON export
     for k,v in ans.items():
         for k2 in v:
-            if isinstance(v[k2], datetime):
+            if isinstance(v[k2], datetime.datetime):
                 try: # 3.6 and beyond
                     v[k2] = v[k2].isoformat(sep=' ', timespec='minutes')
                 except: # not yet 3.6
                     v[k2] = v[k2].isoformat(sep=' ')[:4+1+2+1+2+1+2+1+2]
-            elif isinstance(v[k2], date):
+            elif isinstance(v[k2], datetime.date):
                 if k2 == 'open':
                     v[k2] = v[k2].isoformat() + ' 00:00'
                 else:
@@ -648,14 +700,6 @@ def yamlfile(f):
         /* .today {{ box-shadow: 0 0 1ex 1ex #ffddcc; }} */
         </style></head><body>{}</body></html>'''.format(toHtml(events)), file=hm)
 
-    with open('assignments.json', 'w') as f:
-        f.write(prettyjson(assignments_json(data)))
-    with open('coursegrade.json', 'w') as f:
-        f.write(prettyjson(coursegrade_json(data), maxinline=16))
-
-
-
-
 def tomarkdown(f):
     global default_tz
 
@@ -672,6 +716,14 @@ def tomarkdown(f):
         print(toIcal(events), file=ic)
     with open('markdown/schedule.html', 'w') as hm:
         print(toHtml(events), file=hm)
+    with open('assignments.json', 'w') as f:
+        f.write(prettyjson(assignments_json(data)))
+    with open('coursegrade.json', 'w') as f:
+        f.write(prettyjson(coursegrade_json(data), maxinline=16))
+
+
+
+
 
 
 if __name__ == '__main__':

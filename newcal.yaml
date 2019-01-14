@@ -145,8 +145,5 @@ assignments:
         due: 2019-04-22 12:00:00
     Quiz12:
         due: 2019-04-29 12:00:00
+        
 
-
-Quizzes:
-    link: https://archimedes.cs.virginia.edu/coa2-f2019/quizzes/
-    dates:
