@@ -1,0 +1,51 @@
+# COA2 overview
+
+In COA1 you learned a simple version of how processors work, and used functions that are run by the operating system as "black boxes": i.e., functions that do what they do, we know not how. In COA2, we'll explore a more realistic model of processors, and how they and the operating system work together to provide various functionality we depend on as application programmers.
+
+Each of the topics this term is intricate enough to require focused exploration, which may make it easy to loose sight of how they are all interrelated. The remainder of this section is designed to be an overview of each of those topics and how they fit together.
+
+## Processors: idle = wasteful
+
+A processor has many specialized subsystems: adders and movers and multipliers and so on. Any given instruction typically only uses a subset of these, meaning most are idle. Idle transistors still take up space on the chip, still draw some power and generate some heat: they have cost.
+
+Additionally, some of the steps in executing a single instruction depend on other parts concluding: to determine the next instruction address, for example, requires first determining what the current instruction is, and then adding an appropriate offset to the current instruction's address. You can't start the addition until after you know the size of the instruction. That means that the instruction identifying hardware is idle while the adding is taking place, and the adder is idle (or, more commonly, doing work it will soon throw away) while the instruction identifying is taking place. And this waiting not only has power and heat costs, they also slow down the overall runtime of each instruction.
+
+Henry Ford popularized a partial solution to these problems: the assembly line. After the machinery and workers who created car frames finished the first frame, they could pass it off to the next stage in car construction and begin a second frame. This meant more moving things around and could mean that each car took slightly longer to create from start to finish than if all the workers and tools were focused on one car at a time, but since many cars were in different stages of production at any given point in time, the total number of cars produced per month was greatly increased by the assembly line approach.
+
+Processors make use of an assembly-line like decomposition of the work involved in each instruction. *Pipelining*, as this is called, increases the *throughput* of instructions (i.e., the number of instructions completed per microsecond) but also increases the *latency* (i.e., the number of picoseconds needed for one instruction to be completed). Since we are generally interested in throughput, this is a net win.
+
+Pipelining has several complications that assembly lines do not because the operation of subsequent instructions may depend on the outcomes of previous instructions. Sometimes these can be solved by *forwarding*, taking information from an incomplete previous instruction to facilitate executing a following instruction. But not all information exists to be forwarded, so sometimes processors will perform *out-of-order execution*, picking a future instruction with fewer dependencies to execute first. When it is unclear which instruction comes next (as, for example, following a conditional branch) the processors will sometimes perform *speculative execution*, picking one of the instruction sequences that might be next to execute before knowing if they ought to be run, discarding their results if it turns out that the wrong option was picked.
+
+Since 2017, security exploits have been known that depend on information leakage from speculatively-executed instructions. At the time of writing^[December 2018] it is not yet clear to what degree these newly-discovered attack vectors will influence the design of future processors.
+
+## Caching: avoiding repetitive work
+
+
+
+## Virtual Memory: the illusion of isolation
+
+When writing assembly, we have not had to worry about which regions of memory other processes are using, even though in practice it is common for computers to be running hundreds of different processes concurrently, each with code and data in memory. This is not just a convenience: we don't want other processes to be able to see the contents of our process's memory or else they could use that visibility to read passwords or other private data from us.
+
+This address-space separation is provided via a set of tools collectively called *virtual memory*. Conceptually this is just an extra level of indirection; instead of an instruction like
+
+    movq 20(%eax), %ebx
+
+being implemented as what we might write in C as
+
+    ebx = memory[20 + eax]
+
+it is instead implemented as
+
+    ebx = memory[translation[20 + eax]]
+
+where `translation` is an *address translation* data structure that is changed when changing processes, and that can only be changed by your operating system, not by normal programs. To achieve address translation, we need
+
+a. a data structure that hardware can read.
+a. special software (the operating system or *kernel*) that can modify memory regular user code cannot.
+a. some optimization to make this close to as efficient as direct memory access.
+
+Virtual memory is only one of several functionalities that will require close cooperation between special privileged software (the kernel) and hardware in order to achieve desirable behaviors.
+
+## Interrupts: safe communication with hardware
+
+## Synchronization: concurrency requires coordination

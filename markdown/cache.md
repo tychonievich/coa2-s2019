@@ -1,0 +1,204 @@
+---
+title: Caches -- Keep a finger in it
+...
+
+# A thought experiment
+
+Suppose I handed you a book and asked you to tell me the 211^th^ word on the 83^rd^ page,
+then timed how long it took you to reply.
+Let's call that time $t_1$.
+
+Suppose I handed you another copy of the same book and asked you to tell me the 211^th^ word on the 83^rd^ page,
+then timed how long it took you to reply.
+Let's call that time $t_2$.
+
+We might reasonably assume that $t_2$ would be dramatically smaller that $t_1$.
+In fact, I'd expect $t_2$ to not even include the time needed to open the book.
+$t_1$ is an estimate of the time needed to find a particular word in a book;
+$t_2$ is an estimate of the time needed to recognize that the new book is the same as the old and repeat what you just said.
+
+Now suppose that in-between the first and second request for the 211^th^ word on the 83^rd^ page of this book
+I gave you a hundred other books, pages, and words to tell me.
+There's still some chance that you'd remember the first word
+when the same book, page, and word appeared a second time,
+but more likely you'd need to look it up again,
+though perhaps once you got to the page you'd remember where on the page the word was located.
+
+Caching is a computer hardware (and sometimes also software) technique
+for mimicking this faster-because-we-just-did-this-and-still-remember optimization.
+Simple single-level caching either remembers a result or does not,
+but multi-level caching can also have that partially-remembered characteristic
+that lets a forgotten detail be recovered with only partial work.
+
+Note that in this example, it is important to store more than just the word that is read;
+you also have to remember the address (book, page, and word) at which it was found.
+In caching terminology, that "what we looked up" data
+is known as the **tag**;
+the thing being remembered is the **block**;
+and the tag + block pair is known as a **cache line**.
+
+# Locality
+
+Locality is a pseudo-technical term in computing
+with two subtypes:
+
+Spatial locality
+:   Refers to both (a) having only a small difference in numerical address
+    and (b) programs where most addresses accessed
+    are spatially local to the address accessed before them.
+
+Temporal locality
+:   Refers to the accesses to a single address
+    being clustered in the same portion of the overall runtime of the program.
+
+Most programs, even if not specifically designed to do so,
+exhibit both spatial and temporal locality.
+It is primarily the temporal locality that makes caching useful,
+but caches can be designed to benefit from spatial locality as well.
+
+## Cache line
+
+When caching memory, it is typical to remember not just the exact memory accesses,
+but also the memory nearby, on the assumption (based on spatial locality)
+that if one address is accessed nearby addresses will soon be accessed as well.
+
+The most common way to do this is that when address `x` is accessed,
+all addresses with the same high-order bits are loaded into the cache,
+thus making a larger *block*.
+The *tag* is thus not the full address,
+just the higher-order bits.
+
+{.example ...}
+Suppose a cache is designed with 32-byte blocks.
+When accessing address `0x12345678`,
+all bytes with addresses between `0x12345640`
+and `0x1234567F`
+(i.e., between `0x12345678 & ~0x3F`{.c} and `0x12345678 | 0x3F`{.c})
+are loaded into the block
+and the tag is `0x48d159` (i.e., `0x12345678 >> 6`{.c})
+{/}
+
+The low-order of the original address indicate where, within the block,
+the addressed information is stored within the block
+and is known as the **block offset** or simply the offset.
+
+# Three types of caches
+
+A cache is a finite-size memory that stores a subset of recent results
+of whatever it is caching.
+If "cache" is used without other context,
+it is generally safe to assume that what is being cached is memory accesses,
+but most of the concepts of caching are independent of that detail.
+
+There are several designs of a cache,
+varying based on how they decide what old cache entry is forgotten
+to make room for a new cache entry.
+
+## Fully-associative
+
+A **fully-associative cache** stores a set of cache lines.
+Because it is a set, there is maximal ability to pick and choose
+which line is removed to make room for the next line;
+but that freedom comes at a cost.
+
+First, on each cache access,
+a fully-associative cache needs to check the accessed address
+against the tag of every single cache line in the cache,
+as the line could be stored anywhere within the cache.
+Secondly, it is believed that the best rule about which line to replace
+is the **least-recently used** (LRU) rule:
+that is, replace the cache line that has gone the longest since it was last accessed.
+Computing that requires some additional bookkeeping,
+needing both more storage and more computation.
+
+### Capacity miss
+
+A **cache miss** is when a cache is accessed but the line desired is not located in it.
+Some misses are inevitable, not matter the cache design,
+such as the **cold miss** when the address is accessed for the very first time.
+Other misses are caused by the specific design of the cache.
+
+A fully-associative cache can suffer from a **capacity miss**.
+A capacity miss occurs when an $n$-line cache
+has accessed $n$ or more distinct lines
+since it last accessed the line being requested.
+
+## Direct-mapped
+
+A **direct-mapped cache** stores an array of cache lines.
+As it is an array, an index is needed to know which line is being accessed;
+this index is taken from a part of the address.
+
+To maximize the benefits accruing from spatial locality,
+the index is taken from the bits of the address
+immediately above the offset,
+leaving the bits above that as the tag;
+this is illustrated in [Fig 1](#fig1).
+
+<figure>
+<svg style="max-width:22em; display:table; margin:auto;" version="1.1" viewBox="0 0 172.72 25.4" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(0 -271.6)">
+<rect x="5.08" y="276.68" width="162.56" height="15.24" fill="none" stroke="#000" stroke-width=".5"/>
+<rect x="96.52" y="276.68" width="40.64" height="15.24" fill="none" stroke="#000" stroke-width=".5"/>
+<g font-size="8px" text-anchor="middle">
+<text x="116.84" y="286.84003" text-align="center"><tspan x="116.84" y="286.84003" stroke-width=".264583">index</tspan></text>
+<text x="152.39999" y="286.84003" text-align="center"><tspan x="152.39999" y="286.84003" stroke-width=".264583">offset</tspan></text>
+<text x="50.799999" y="286.84003" text-align="center"><tspan x="50.799999" y="286.84003" stroke-width=".264583">tag</tspan></text>
+</g>
+</g>
+</svg>
+<figcaption id="fig1"><strong>Fig 1</strong>: Breakdown of direct-mapped address.
+The $\log_2($bytes per block$)$ low-order bits are the block offset;
+the $\log_2($lines in cache$)$ next lowest are the index;
+and the remaining higher-order bits are the tag.</figcaption>
+</figure>
+
+Direct mapped caches are very efficient, and can be made far larger than fully-associative caches can.
+However, they are far less flexible and often have a higher miss-rate per unit capacity.
+
+### Conflict miss
+
+A direct-mapped cache can suffer from a **conflict miss**
+(and the cold miss that any cache can experience).
+A conflict miss occurs when a different line has been loaded into the same index
+since a requested line was last accessed.
+While conflict misses are more likely when a cache is small than when it is large,
+in a direct mapped cache of any size a conflict miss can occur with as few as two memory accesses.
+
+{.example ...}
+Suppose a direct-mapped cache has 16-byte blocks
+and 256 lines.
+Then the addresses `0xbf1234`, `0xbf1238` and `0xbf9230`
+all have the same index (`0x23`).
+The first two also have the same tag (`0xbf1`)
+and hence are not in conflict with one another;
+the third has a different tag (`0xbf9`).
+
+If the following memory addresses are accessed in order,
+the following notes if it is a hit or miss and if a miss, what type.
+
+1. address `0xbf1234` -- cold miss
+2. address `0xbf1238` -- hit
+3. address `0xbf9230` -- cold miss
+4. address `0xbf1234` -- conflict miss
+{/}
+
+## Set-associative
+
+A set-associative cache
+is a compromise
+between the flexibility at cost of a fully-associative cache
+and the scale and efficiency of a direct-mapped cache.
+Structurally, it is an array of sets of lines.
+Set associative caches are far and away the most common type in hardware.
+
+Addresses are processed by set-associative caches
+exactly the same way they are for direct-mapped caches:
+a tag, index, and block offset.
+The index, however, instead of identifying a single like
+identifies an entire set of lines.
+As such, it is traditionally called a **set index** instead of simply an index.
+The size of the sets are referred to using the term
+"$n$-way set-associative cache" meaning each set contains $n$ lines.
+
+
