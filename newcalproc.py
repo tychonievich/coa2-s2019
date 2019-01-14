@@ -648,6 +648,13 @@ def yamlfile(f):
         /* .today {{ box-shadow: 0 0 1ex 1ex #ffddcc; }} */
         </style></head><body>{}</body></html>'''.format(toHtml(events)), file=hm)
 
+    with open('assignments.json', 'w') as f:
+        f.write(prettyjson(assignments_json(data)))
+    with open('coursegrade.json', 'w') as f:
+        f.write(prettyjson(coursegrade_json(data), maxinline=16))
+
+
+
 
 def tomarkdown(f):
     global default_tz
