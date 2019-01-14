@@ -34,7 +34,7 @@ sections:
 lectures:
     - welcome
     - privilege
-    - [interrupts, privilege]
+    - [privilege, interrupts]
     - interrupts
     - user accounts
     - privilege escalation
@@ -117,32 +117,32 @@ assignments:
 
 
 
-    Quiz00:
+    Quiz01:
         weight: 0
         due: 2019-01-23 12:00:00
-    Quiz01:
-        due: 2019-01-28 12:00:00
     Quiz02:
-        due: 2019-02-04 12:00:00
+        due: 2019-01-28 12:00:00
     Quiz03:
+        due: 2019-02-04 12:00:00
+    Quiz04:
         due: 2019-02-11 12:00:00
     
-    Quiz04:
-        due: 2019-02-25 12:00:00
     Quiz05:
-        due: 2019-03-04 12:00:00
+        due: 2019-02-25 12:00:00
     Quiz06:
-        due: 2019-03-18 12:00:00
+        due: 2019-03-04 12:00:00
     Quiz07:
+        due: 2019-03-18 12:00:00
+    Quiz08:
         due: 2019-03-25 12:00:00
     
-    Quiz08:
-        due: 2019-04-08 12:00:00
     Quiz09:
-        due: 2019-04-15 12:00:00
+        due: 2019-04-08 12:00:00
     Quiz10:
-        due: 2019-04-22 12:00:00
+        due: 2019-04-15 12:00:00
     Quiz11:
+        due: 2019-04-22 12:00:00
+    Quiz12:
         due: 2019-04-29 12:00:00
 
 
