@@ -109,7 +109,7 @@ assignments:
             portion: "10"
             duration: -1
             rubric: {"kind":"percentage"}
-            link: https://archimedes.cs.virginia.edu/coa2-f2019/quizzes/
+            link: https://kytos.cs.virginia.edu/coa2-f2019/quizzes/
 
     PA01:
         title: 'warmup'
