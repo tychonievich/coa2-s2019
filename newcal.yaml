@@ -86,6 +86,11 @@ labs: []
 
 reading:
     spectre: <https://meltdownattack.com/>
+    interrupts: '[kernels §2](kernel.html)'
+    privilege: '[kernels §1](kernel.html)'
+    virtual memory: '[kernels §3](kernel.html)'
+    process issolation: '[kernels](kernel.html)'
+    
 
 assignments:
     ".groups":

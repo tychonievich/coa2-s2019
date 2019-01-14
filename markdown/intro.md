@@ -1,6 +1,8 @@
-# COA2 overview
+---
+title: COA2 overview
+...
 
-In COA1 you learned a simple version of how processors work, and used functions that are run by the operating system as "black boxes": i.e., functions that do what they do, we know not how. In COA2, we'll explore a more realistic model of processors, and how they and the operating system work together to provide various functionality we depend on as application programmers.
+In [COA1](../../COA1/) you learned a simple version of how processors work, and used operating system provided functions as "black boxes": i.e., functions that do what they do, we know not how. In COA2, we'll explore a more realistic model of processors, and how they and the operating system work together to provide various functionality we depend on as application programmers.
 
 Each of the topics this term is intricate enough to require focused exploration, which may make it easy to loose sight of how they are all interrelated. The remainder of this section is designed to be an overview of each of those topics and how they fit together.
 
@@ -16,11 +18,35 @@ Processors make use of an assembly-line like decomposition of the work involved 
 
 Pipelining has several complications that assembly lines do not because the operation of subsequent instructions may depend on the outcomes of previous instructions. Sometimes these can be solved by *forwarding*, taking information from an incomplete previous instruction to facilitate executing a following instruction. But not all information exists to be forwarded, so sometimes processors will perform *out-of-order execution*, picking a future instruction with fewer dependencies to execute first. When it is unclear which instruction comes next (as, for example, following a conditional branch) the processors will sometimes perform *speculative execution*, picking one of the instruction sequences that might be next to execute before knowing if they ought to be run, discarding their results if it turns out that the wrong option was picked.
 
-Since 2017, security exploits have been known that depend on information leakage from speculatively-executed instructions. At the time of writing^[December 2018] it is not yet clear to what degree these newly-discovered attack vectors will influence the design of future processors.
+Since 2017, security exploits have been known that depend on information leakage from speculatively-executed instructions. At the time of writing^[January 2019] it is not yet clear to what degree these newly-discovered attack vectors will influence the design of future processors.
 
 ## Caching: avoiding repetitive work
 
+If I ask you "What is thirty-seven times one hundred three?"
+you'll require a few seconds to reply.
+If I then immediately ask the same question a second time,
+the second reply will come much more rapidly.
+This is because your brain has cached the answer: stored it in a small slot of short-term memory
+so it can produce the result without recomputation.
 
+Caches are used throughout computing because work tends to repeat.
+One of their most iconic uses is with memory.
+It can take hundreds of nanoseconds to access a multi-gigabyte DRAM chip,
+but only a few nanoseconds to access a few-megabyte SRAM chip.
+Since programs often access the same address repeatedly,
+significant speed increases can be created
+by loading a copy of memory from the slower chip to the faster
+and serving subsequent accesses from that faster cache.
+
+Memory caching matters to ordinary programmers in at least two ways.
+First, code with good locality (i.e., uses memory in a way the cache expected it to)
+can be as much as an order of magnitude faster than code with poor locality.
+Second, caching is emerging as a side channel,
+a way that program security can be compromised by looking for side effects of computation
+that remain visible in the cache.
+
+We'll also discuss a bit about software caching and memoizing as a performance tool,
+though that is not a major topic of this course.
 
 ## Virtual Memory: the illusion of isolation
 
@@ -47,5 +73,7 @@ a. some optimization to make this close to as efficient as direct memory access.
 Virtual memory is only one of several functionalities that will require close cooperation between special privileged software (the kernel) and hardware in order to achieve desirable behaviors.
 
 ## Interrupts: safe communication with hardware
+
+
 
 ## Synchronization: concurrency requires coordination

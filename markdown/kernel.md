@@ -3,25 +3,25 @@ title: Kernels -- Software for the Hardware
 ...
 
 
-# Kernel Mode vs. User Mode
+## Kernel Mode vs. User Mode
 
 All multi-purposed chips today have (at least) two modes in which they can operate:
 user mode and kernel mode.
 Thus far you have probably only written user-mode software, and most of you will never write kernel-mode software during your entire software development careers.
 
-## Motivation
+### Motivation
 
 Some activities the computer does can only be done by kernel-mode software;
 if user-mode code wants to do them, it has to do so by asking the kernel.
 This restriction provides several advantages.
 
-### Limiting Bugs' Potential for Evil
+#### Limiting Bugs' Potential for Evil
 
 One reason to not run in kernel mode is to limit the scope of mistakes a software bug can have.
 Inside the computer is all of the code and data that handles drawing the screen and tracking the mouse and reacting to keys and so on; I'd rather not be able to make a mistake when writing my Hello World program and accidentally mess up those core functionalities.
 By running in user mode, if my code tries to touch any of that it will be blocked from doing so: my program will crash, but the computer will keep running.
 
-### Each Program Thinks it is In Control
+#### Each Program Thinks it is In Control
 
 Physical computers have limited physical resources.
 One of the benefits of running in user mode is that the particular limitations are hidden from you by the kernel and hardware working together.
@@ -32,23 +32,23 @@ Perhaps you have a terminal, an editor, and your developed code all running at o
 The kernel and hardware will work together to ensure that your code cannot even see, let alone modify, the memory being used by the terminal or editor.
 Each program is given the illusion of being the only one running on an unlimited machine.
 
-### Wrapper around Hardware
+#### Wrapper around Hardware
 
 Each piece of hardware attached to a chip has its own protocols and nuances of operation.
 Fortunately, only the kernel needs to know about those details.
 If the mouse tries to talk to your program directly, the kernel intercepts the communication and handles it for you so you don't notice it happened unless you asked the kernel to inform you about it.
 If you try to talk to the disk, the kernel likewise moderates that communication, keeping you from needing to know the specific protocol the currently-attached disk expects.
 
-### Multiple Users
+#### Multiple Users
 
 Because the kernel is an unavoidable intermediary for talking to hardware, it can chose to forbid some interactions.
 One common use of this is to allow multiple user accounts.
 Since the kernel is the one that controls access to the disk, for example, it can chose not to allow my processes to access the part of the disk it has assigned to you, not me.
 
 
-## Implementation
+### Implementation
 
-### Protected Instructions and Memory
+#### Protected Instructions and Memory
 
 When in user mode, there are a set of instructions that cannot be executed
 and segments of memory that cannot be accessed.
@@ -58,7 +58,7 @@ Examples of things you cannot directly access in user mode include
 - instructions that send signals out of the chip to communicate with disks, networks, etc
 - instructions that let user-mode code execute in kernel-mode
 
-### Mode Bit
+#### Mode Bit
 
 The simplest way to create two modes is to have a single-bit register somewhere on the chip
 that indicates if the chip is currently executing in user mode or in kernel mode.
@@ -70,7 +70,7 @@ Modern processors often have more than one operating mode with more than one lev
 which (among other benefits) can help make virtualization efficient;
 the details of these additional modes are beyond the scope of this course.
 
-### Mode-switch via Exceptions
+#### Mode-switch via Exceptions
 
 The core mechanic for becoming the kernel is a hardware exception.
 An exception results in several functionally-simultaneous changes to processor state,
@@ -79,18 +79,18 @@ Thus, the only mechanisms that exist for entering kernel mode will running kerne
 
 The nature of these hardware exceptions and the jump to kernel code that is associated with them is a large enough topic to deserve [it's own section](#exceptions).
 
-# Exceptions
+## Exceptions
 
 Hardware exceptions are examples of "exceptional control flow":
 that is, the sequence of instructions being operated around an exception
 is an exception to the usual rules of sequentiality and jumps.
 They also tend to appear in exceptional (that is, unusual) situations.
 
-## Kinds
+### Kinds
 
 There are several kinds of hardware exceptions.
 
-### Interrupts
+#### Interrupts
 
 An interrupt occurs independently from the code being executed when it occurs.
 It might result from the mouse moving, a network packet arriving, or the like.
@@ -100,7 +100,7 @@ The user code is frozen, the interrupt handled, and then the user code resumed a
 
 {.aside} Some sources call all exceptions "interrupts," calling the interrupting-type of exception an "asynchronous interrupt" instead.
 
-### Faults
+#### Faults
 
 A fault is the result of an instruction failing to succeed in its execution.
 Examples include dividing by zero, dereferencing a null pointer, or attempting to execute a protected instruction while in user mode.
@@ -111,21 +111,21 @@ or it cannot fix the problem and kills the process that cause the fault instead.
 In practice, fixable faults happen quite often, notably the [page fault](#pages) discussed later.
 Even faults the kernel can't fix on its own are often handled by asking the user code if it knows how to fix them using a mechanism called [signals](#signals), though many programs do not chose to handle the signals so the end result is often still termination of the fault-generating process.
 
-### Traps
+#### Traps
 
 A trap is an exception caused by a special instruction whose sole job is to generate exceptions.
 Traps are the main mechanism for intentionally switching from user mode to kernel mode and are the core of all system calls.
 System calls are used to interact with the file system, spawn and wait on threads, listen for key presses, and anything else that you cannot do with simple code alone.
 
 
-## Handling
+### Handling
 
 When an exception occurs, the processor switched to kernel mode and jumping to a special function in kernel code called an "exception handler."
 Because interrupts exist, this can happen without any particular instruction causing the jump,
 and thus might happen at any point during the code running.
 In order for the handler to later resume user code, the exception handling process must also save the processor state before executing the handler.
 
-### Save-Handle-Restore
+#### Save-Handle-Restore
 
 The basic mechanism for any exception to be handled is
 
@@ -136,7 +136,7 @@ The basic mechanism for any exception to be handled is
 
 These steps (except for the actual execution of the exception handler) are all done atomically by the hardware.
 
-### Which Handler?
+#### Which Handler?
 
 In general, there can be as many different exception handlers as there are exception causes.
 To select which one to run, the hardware consults something called an **exception table**.
@@ -203,7 +203,7 @@ Table:
 Exception tables are just one particular use of this array-of-code-addresses idea.
 {/}
 
-### After the Handler
+#### After the Handler
 
 Handlers may either abort the user code or resume its operation.
 Aborting is primarily used when there is no obvious way to recover from the cause of the exception.
@@ -215,7 +215,7 @@ and thus resumes with the subsequent instruction.
 A fault handler, on the other hand, is supposed to remove the barrier to success that caused the fault
 and thus generally re-runs the faulting instruction.
 
-### Example: Linux system calls
+#### Example: Linux system calls
 
 In Linux, almost all communications from user- to kernel-code are handled by a trap with exception number 128.
 Instead of using exception number to select the particular action the user is requesting of the kernel, that action is put in a number in `%rax`;
@@ -279,9 +279,9 @@ Let's walk through this a bit at a time:
 After that is some error checking code, and then the function returns. The whole function's only 11 instructions (24 bytes) long.
 {/}
 
-## Exception-Like Constructs
+### Exception-Like Constructs
 
-### Signals
+#### Signals
 
 One view of exceptions is that they enable communication from user code to the kernel.
 Signals permit the opposite direction of communication.
@@ -307,8 +307,8 @@ most commonly terminating the process.
 If we want Ctrl+C to do something else, we have to handle that signal:
 
 ````c
-#include <stdio.h>
-#include <signal.h>
+##include <stdio.h>
+##include <signal.h>
 
 static void handler(int signum) {
     printf("Provide end-of-file to end program.\n");
@@ -337,8 +337,8 @@ int main() {
 For example, this code:
 
 ````c
-#include <stdio.h>
-#include <signal.h>
+##include <stdio.h>
+##include <signal.h>
 
 static void handler(int signum) {
     printf("Ignoring segfault.\n");
@@ -392,7 +392,7 @@ From a bash command line, you can send signals to running processes.
 There are other tools for sending signals, but the above are sufficient for most common use cases.
 {/}
 
-### `setjmp`{.c}, `longjmp`{.c}, and software exceptions
+#### `setjmp`{.c}, `longjmp`{.c}, and software exceptions
 
 Portions of the save- and restore-state functionality used by exception handlers
 is exposed by the C library functions `setjmp` and `longjmp`.
@@ -405,8 +405,8 @@ Thereafter `longjmp` can be called with that same `jmp_buf` as an argument;
 {.example} The following program
 
 ```c
-#include <setjmp.h>
-#include <stdio.h>
+##include <setjmp.h>
+##include <stdio.h>
 
 jmp_buf env;
 int n = 0;
@@ -493,7 +493,7 @@ which many languages maintain with sufficient discipline
 that it can be "unwound" to restore a previous state upon a `throw`.
 
 
-# Virtual Memory
+## Virtual Memory
 
 One of the most important functions provided by a collaboration
 between the hardware and the operating system
@@ -505,7 +505,7 @@ a. each process with the illusion that all possible addresses exist, no matter h
 a. memory protection such that user-mode code cannot access kernel memory.
 a. an efficient mechanism for communicating with processes
 
-## Processes
+### Processes
 
 A **process** is a software-only operating systems construct
 that roughly parallels the end-user idea of a running program.
@@ -526,7 +526,7 @@ use a hardware timer to create an exception every few dozen milliseconds
 to enabled automated context switching and facilitate the illusion that
 more processes are running at a time than there are processors in the computer.
 
-## Regions of Memory
+### Regions of Memory
 
 To provide process separation,
 each memory access needs to be checked to ensure it is permitted.
@@ -543,7 +543,7 @@ Because each process may access a very large number of memory addresses,
 they also need to be efficient in space,
 in practice meaning that permissions are applied to large contiguous regions of memory.
 
-### Segments revisited
+#### Segments revisited
 
 A common operating system internal representation of memory regions
 is a list if **segements**,
@@ -595,7 +595,7 @@ provide library functions `mmap` and `munmap`
 for requesting the operating system adjust its segments.
 Typical user applications use higher-level wrappers such as `malloc` instead.
 
-### Pages
+#### Pages
 
 Hardware access to memory protections
 is designed to be very simple so that it can be very rapid.
@@ -642,7 +642,7 @@ This translation involves the following steps:
 Hardware uses various optimizations to speed up this process,
 notably using the [Translation Lookaside Buffer].
 
-### Protection... but side channels?
+#### Protection... but side channels?
 
 Address translation is designed so that the hardware guarantees that
 
@@ -671,13 +671,13 @@ because the data in question is known.
 That the timing of individual memory accesses was information that needed protection
 was not even known for decades after it became a potential side channel.
 
-## Page Tables
+### Page Tables
 
 A page table is conceptually just a map between virtual page numbers
 (which are fixed-size integers)
 and page table entries (which are each a physical page number and a set of Boolean flags).
 
-### Single-level page tables
+#### Single-level page tables
 
 In the early days of virtual memory,
 when the entire addressable space was not large,
@@ -717,7 +717,7 @@ but the hardware can support 512KB physical RAM.
 Single-level page tables are inefficient for 32-bit addresses
 and basically untenable for 64-bit addresses.
 
-### Multi-level page tables
+#### Multi-level page tables
 
 Multi-level page tables are a particular instance
 of a linked data structure known as a high-arity (or wide node)
@@ -728,7 +728,7 @@ Since this is not a data structure that is generally taught in data structure co
 this section provides a full overview of the data structure itself
 before discussing how they are used for virutal memory.
 
-#### Fixed-depth high-arity trees
+##### Fixed-depth high-arity trees
 
 A tree is a linked data structure
 where each node contains an array of pointers to additional nodes.
@@ -753,7 +753,7 @@ with arity 16 and three levels of intermediate nodes.
 It has a fixed height of (depending on how you count) 3 or 4.
 
 ```c
-#define WIDTH 16
+##define WIDTH 16
 
 struct leaf {
     PAYLOAD data[WIDTH];
@@ -880,7 +880,7 @@ Thus, only ten intermediate nodes and 5 × 16 = 80 `PAYLAOD` values are allocate
 rather than the 65,535 `PAYLOAD` values that would have been allocated for a simple array.
 {/}
 
-#### Multi-level page table implementation
+##### Multi-level page table implementation
 
 Most programs access only a few megabytes of memory,
 allocated in a few contiguous chunks,
@@ -1019,7 +1019,7 @@ An important thing to note about the above:
 software (the operating system) writes the page table
 in a format that the hardware understands and can read.
 
-### Translation Lookaside Buffer
+#### Translation Lookaside Buffer
 
 Address translation needs to happen for every instruction,
 at least once to fetch the instruction
@@ -1055,13 +1055,13 @@ pa = (ppn<<12) | (va & ((1<<12)-1));
 For more details on how caches like the TLB work,
 see [Caching](caching.html).
 
-## Usage
+### Usage
 
 Various uses of virtual memory are alluded to above
 to motivate the various features of virtual memory;
 this section focuses on those uses.
 
-### Page Swapping
+#### Page Swapping
 
 Because addresses in code can be mapped to other addresses,
 with operating system intervention if needed,
@@ -1100,7 +1100,7 @@ but it is still a part of every major end-user OS.
 [^arguably]: Arguably as in, I have heard friendly arguments
     between people who know about this than I on this topic.
 
-### Shared Memory
+#### Shared Memory
 
 One of the goals of virtual memory is to allow each process to have its own address space,
 but because this is done by having a mapping between virtual and physical pages,
@@ -1151,7 +1151,7 @@ Shared-memory communication.
     but does not, by itself, provide mechanisms for efficiently
     awaiting a response.
 
-### Process Switching
+#### Process Switching
 
 Switching between processes happens in the operating system's code.
 When the OS was invoked (in an [Exception Handler](#handling))
@@ -1168,7 +1168,7 @@ It is not uncommon for the operating system
 to perform many different bookkeeping and other operations
 each time a context switch is performed.
 
-### Direct Memory Access
+#### Direct Memory Access
 
 Physical memory pages can be given to systems other than software processes.
 It is common for various input/output operations
