@@ -389,6 +389,11 @@ def calendar(data):
         elif 'writeup' in tdat and 'base' in data['meta']: details['link'] = data['meta']['base'] + tdat['writeup']
         elif 'title' in tdat and 'base' in tdat:
             details['link'] = tdat['base'] + slugify(title)+'.html'
+        if 'files' in tdat: 
+            if type(tdat['files']) is not list:
+                details['files'] = list(tdat['files'])
+            else:
+                details['files'] = tdat['files']
         ans.append((start.timestamp(), details))
     
     # Exams
