@@ -114,7 +114,7 @@ assignments:
     PA01:
         title: 'warmup'
         due: 2019-01-25 14:00:00
-    
+        files: [main.c, primes.c, primes.h, Makefile]
 
 
 
