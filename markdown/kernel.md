@@ -303,7 +303,7 @@ Linux defines many different signals, listed in `man 7 signal`{.bash}.
 Each of them has a default action if no handler is registered,
 most commonly terminating the process.
 
-{.example} Typing Ctrl+C on the command line causes the SIGINT signal to be generated.
+{.example ...} Typing Ctrl+C on the command line causes the SIGINT signal to be generated.
 If we want Ctrl+C to do something else, we have to handle that signal:
 
 ````c
