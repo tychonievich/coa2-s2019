@@ -119,7 +119,6 @@ assignments:
 
 
     Quiz01:
-        weight: 0
         due: 2019-01-23 12:00:00
     Quiz02:
         due: 2019-01-28 12:00:00
