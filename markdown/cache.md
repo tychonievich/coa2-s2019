@@ -201,4 +201,63 @@ As such, it is traditionally called a **set index** instead of simply an index.
 The size of the sets are referred to using the term
 "$n$-way set-associative cache" meaning each set contains $n$ lines.
 
+# Common memory caches
+
+As of 2019, it is common for end-user computers to have a variety of caches.
+
+L1
+:   The L1 cache is the smallest and fastest cache.
+    It is virtually always placed directly on the processor chip itself
+    and sized so that an access to L1 takes only a single cycle^[At least in a [pipelined](processors.html) sense. The goal is that an L1 hit does not slow down processing at all.].
+    It is often designed to work on virtual addresses rather than physical,
+    or to have the set index be entirely within the page offset so that TLB lookup
+    can be performed concurrently with L1 lookup.
+
+TLB
+:   The TLB tends to be a small set-associative cache with fairly large sets
+    that holds a single [page table entry](kernel.html#page-tables) per block.
+    
+    The TLB is often a read-only cache.
+    If the page table is modified, the TLB may need to be partly or fully flushed,
+    marking its entries as invalid and requiring full page table lookups to get its contents refreshed.
+
+L2--L*n*
+:   The L2 cache is larger than the L1
+    which means both that it is more likely that any given access will hit in the L2
+    and that each access takes a bit longer.
+    The L3 is bigger (and thus slower) than the L2, and so on.
+    The number of caches in this cache hierarchy increases every few years
+    as processors continue to get faster than memory
+    and more intermediate levels make sense.
+
+If a block of data is stored in the L$i$ cache, it is also stored in the L$i+1$ cache and so on back up to RAM.
+
+Each cache also has a policy for how memory writes are sent to larger components of the cache hierarchy.
+The two most common such policies are
+
+Write back
+:   An edit is placed only in the cache itself
+    and not sent to the larger layer beyond it until the cache line is going to be evicted.
+    Write back policies typically use a "dirty bit" in each cache line
+    to mark which lines have been edited (are "dirty") and need to be written upon eviction
+    and which were read without being modified.
+
+Write through
+:   Each edit is immediately sent to the next larger layer of the cache hierarchy.
+    Typically this means there is some kind of finite-size write queue
+    between the cache layers and that if it is full
+    the write happens at the speed of the slower cache instead of the faster,
+    but it also means that evicting a cache line does not itself slow down processing.
+
+There is no need for all of the cache layers to use the same write policy;
+a write-back L1 coupled with a write-though L2 is a perfectly doable configuration.
+
+# Cache-efficient code
+
+As guiding principles, code is more cache-efficient if
+
+- It performs all accesses to one region of memory at the same time
+- It uses memory efficiently
+- Addresses are aligned so no single access spans cache lines
+- When multiple different regions of memory are being accessed, differ in set index, not just tag
 

@@ -92,6 +92,7 @@ reading:
     virtual memory: '[kernels §3](kernel.html#virtual-memory)'
     process issolation: '[kernels](kernel.html)'
     DMA: '[kernels §3.4.4](kernel.html#direct-memory-access)'
+    caches: '[caches](cache.html)'
 
 assignments:
     ".groups":
