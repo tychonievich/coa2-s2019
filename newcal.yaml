@@ -1,0 +1,145 @@
+Special Dates:
+  Courses begin: 2019-01-14
+  Courses end: 2019-04-30
+  Add deadline: 2019-01-28
+  Drop deadline: 2019-02-25
+  Withdraw deadline: 2019-03-18
+  MLK break:
+    start: 2019-01-21
+    end: 2019-01-21
+  Spring break:
+    start: 2019-03-09
+    end: 2019-03-17
+  Exam 1: 2019-02-18
+  Exam 2: 2019-04-01
+  Exam 3: 2019-05-02
+
+meta:
+  timezone: America/New_York
+  name: COA2
+  lecture exam: true
+  final:
+    start: 2019-05-02 14:00:00
+    duration: 180
+    room: Olsson 005
+
+sections:
+  CS2501-004:
+    type: lecture
+    room: Olsson 005
+    days: [Monday, Wednesday, Friday]
+    start: 14:00
+    duration: 50
+
+lectures:
+    - welcome
+    - busses
+    - DMA
+    - [interrupts, privilege]
+    - interrupts
+    - user accounts
+    - privilege escalation
+    - caches
+    - caches
+    
+    - [UDP, TCP, IP]
+    - [ports, DNS]
+    - [spoofing, snooping]
+    - TLS
+    - socket programming
+    - socket programming
+
+    - virtual memory
+    - virtual memory
+    - virtual memory
+    - process isolation
+
+    - concurrency
+    - parallelism
+    - race conditions
+    - atomic ops
+    - semaphores
+    - monitors
+    - roll back
+    - deadlock
+    - deadlock
+    - consistency models
+    - concurrency bugs
+    - concurrency bugs
+    - all bugs exploitable
+    - reporting exploits
+
+    - [power, pipeline]
+    - [pipeline, speculation]
+    - [speculation, out-of-order]
+    - multicore
+    - processor gotchas
+    - [portsmash, heartbleed, spectre]
+    - security/speed tradeoffs
+    
+check out:
+    - 'https://www.youtube.com/watch?v=I5mRwzVvFGE'
+    - 'about specter'
+
+
+labs: []
+
+reading:
+    spectre: <https://meltdownattack.com/>
+
+assignments:
+    ".groups":
+        PA:
+            portion: "40"
+            late-policy: [0.9, 0.8]
+            total: 10
+        Exam:
+            portion: "40"
+            rubric: {"kind":"percentage"}
+        Quiz:
+            portion: "20"
+            drop: 1
+            portion: "10"
+            duration: -1
+            rubric: {"kind":"percentage"}
+            link: https://archimedes.cs.virginia.edu/coa2-f2019/quizzes/
+
+    PA01:
+        title: 'warmup'
+        due: 2019-01-25 14:00:00
+    
+
+
+
+    Quiz00:
+        weight: 0
+        due: 2019-01-23 12:00:00
+    Quiz01:
+        due: 2019-01-28 12:00:00
+    Quiz02:
+        due: 2019-02-04 12:00:00
+    Quiz03:
+        due: 2019-02-11 12:00:00
+    
+    Quiz04:
+        due: 2019-02-25 12:00:00
+    Quiz05:
+        due: 2019-03-04 12:00:00
+    Quiz06:
+        due: 2019-03-18 12:00:00
+    Quiz07:
+        due: 2019-03-25 12:00:00
+    
+    Quiz08:
+        due: 2019-04-08 12:00:00
+    Quiz09:
+        due: 2019-04-15 12:00:00
+    Quiz10:
+        due: 2019-04-22 12:00:00
+    Quiz11:
+        due: 2019-04-29 12:00:00
+
+
+Quizzes:
+    link: https://archimedes.cs.virginia.edu/coa2-f2019/quizzes/
+    dates:
