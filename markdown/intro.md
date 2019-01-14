@@ -83,7 +83,52 @@ it is more common to use interrupts.
 Interrupts allow a signal on a wire entering the processor
 to change what code the processor is running, suspending your program
 and running an interrupt handler in the operating system.
+There are many benefits to this design:
+it removes the need to frequently check of new input,
+ensures that only trusted code handle I/O devices,
+and provides separation between peripheral drivers and the user code that interacts with them.
 
-
+Interrupt handling is a special case of a more general tool known as *exception handling*.
+It's not just I/O devices that might cause the operating system to take over:
+it is also invoked if code does something impossible like dividing by zero
+or something that requires fixing like trying to access a memory address that has no translation
+or even just runs too long without letting another process have a turn.
+Hardware exceptions, and related concepts like signals and software exceptions, are key parts of modern computer organization.
 
 # Synchronization: concurrency requires coordination
+
+Sometimes you need to do several things at once.
+Consider the common task of browsing with several browser tabs open at once.
+You, as a user of software, expect all of the browser tabs to be loading all of the content of each page concurrently,
+and the computer to react with no perceptible delay to every keystroke and mouse motion,
+and music and videos to keep playing...
+
+Concurrency is pervasive in computing.
+Sometimes, it is truly parallel: multiple processor cores doing different tasks at the same time.
+Often, it is merely the illusion of parallelism: a single processor jumps back and forth between several tasks many times a second so that they all appear to make progress together.
+Either way, achieving concurrency is relatively easy
+compared to the complexity of getting multiple concurrent actions to interact properly.
+
+As a simple thought experiment, imagine that a teacher wrote a `0` on the board
+and asked all the students to add their age to the number on the board and write the sum back up on the board.
+Getting all the students to add their age to the number is easy;
+getting them all the ability to write it back on the board is trickier;
+getting them all to add their age to the total age so far is harder still,
+and can seem to require that each student act one at a time.
+There are approaches to this task where some parallelism is still used,
+but they are far more complicated than a simple description of the task suggests.
+
+This course will not spend too much time on how to design concurrent algorithms,
+but will spend some time on how to negotiate coordination between concurrent threads and processes.
+What does it mean to wait for another agent?
+What happens if two agents are both waiting for the other to act first?
+How does all of this manifest in hardware and software?
+These and related topics will occupy a significant part of our attention this semester.
+
+# Networking: connecting to other computers
+
+It is decreasingly common to have a program that does not interact with other computers in some way.
+Networking is a larger topic than we'll be able to fully explore,
+but there are a few concepts that are common enough to deserve our attention.
+In particular, DNS and TCP/IP are so pervasive, it is not uncommon for people to assume they are being used any time networked communication is undertaken.
+

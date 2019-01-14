@@ -85,7 +85,7 @@ check out:
 labs: []
 
 reading:
-    welcom: '[introduction](intro.html)'
+    welcome: '[introduction](intro.html)'
     spectre: <https://meltdownattack.com/>
     interrupts: '[kernels §2](kernel.html#exceptions)'
     privilege: '[kernels §1](kernel.html)'
