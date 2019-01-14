@@ -33,26 +33,27 @@ sections:
 
 lectures:
     - welcome
-    - busses
-    - DMA
+    - priviledge
     - [interrupts, privilege]
     - interrupts
     - user accounts
     - privilege escalation
-    - caches
-    - caches
+    - virtual memory
+    - virtual memory
+    - virtual memory
+    - process isolation
     
+    - busses
+    - DMA
     - [UDP, TCP, IP]
     - [ports, DNS]
     - [spoofing, snooping]
     - TLS
     - socket programming
     - socket programming
+    - caches
+    - caches
 
-    - virtual memory
-    - virtual memory
-    - virtual memory
-    - process isolation
 
     - concurrency
     - parallelism
@@ -86,11 +87,11 @@ labs: []
 
 reading:
     spectre: <https://meltdownattack.com/>
-    interrupts: '[kernels §2](kernel.html)'
+    interrupts: '[kernels §2](kernel.html#exceptions)'
     privilege: '[kernels §1](kernel.html)'
-    virtual memory: '[kernels §3](kernel.html)'
+    virtual memory: '[kernels §3](kernel.html#virtual-memory)'
     process issolation: '[kernels](kernel.html)'
-    
+    DMA: '[kernels §3.4.4](kernel.html#direct-memory-access)'
 
 assignments:
     ".groups":
