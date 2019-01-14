@@ -333,7 +333,7 @@ int main() {
 ````
 {/}
 
-{.example} Almost all signals can be overridden, but for many it is not wise to do so.
+{.example ...} Almost all signals can be overridden, but for many it is not wise to do so.
 For example, this code:
 
 ````c
@@ -402,7 +402,7 @@ Thereafter `longjmp` can be called with that same `jmp_buf` as an argument;
 `longjmp` never returns, instead "returning" from `setjmp` for a second time.
 `longjmp` also provides an alternative return value for `setjmp`.
 
-{.example} The following program
+{.example ...} The following program
 
 ```c
 #include <setjmp.h>
