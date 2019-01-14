@@ -48,8 +48,6 @@ lectures:
     - [ports, DNS]
     - [spoofing, snooping]
     - TLS
-    - socket programming
-    - socket programming
     - caches
     - caches
 
