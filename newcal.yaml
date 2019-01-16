@@ -33,7 +33,7 @@ sections:
 
 lectures:
     - welcome
-    - privilege
+    - [building, privilege]
     - [privilege, interrupts]
     - interrupts
     - user accounts
@@ -83,6 +83,7 @@ check out:
 labs: []
 
 reading:
+    building: ["[ssh](remote.html)", "[make](make.html)"]
     welcome: '[introduction](intro.html)'
     spectre: <https://meltdownattack.com/>
     interrupts: '[kernels §2](kernel.html#exceptions)'
