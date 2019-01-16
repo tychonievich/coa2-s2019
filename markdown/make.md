@@ -30,39 +30,38 @@ all: runner tester
 
 # Create a runner target ...
 runner: main.o $(objects)
-    $(CC) $(LDFLAGS) $< -o $@
+	$(CC) $(LDFLAGS) $^ -o $@
 
 # ... and a target that runs it
 run: runner
-    ./runner
+	./runner
 
 
 
 # Create a tester target ...
 tester: tester.o $(objects)
-    $(CC) $(LDFLAGS) $< -o $@
+	$(CC) $(LDFLAGS) $^ -o $@
 
 # ... and a target that runs it
 test: tester
-    ./tester
-
-test: tester.o $(objects)
-    $(CC) $(LDFLAGS) $< -o $@
-    ./test
+	./tester
 
 
 
 # genetic rule to build a .o from any .c
 # see https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html
 %.o: %.c
-    $(CC) -c $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
 
 
 # something to remove files the makefile created
 clean:
-    rm -f run test main.o tester.o $(objects)
+	rm -f runner tester main.o tester.o $(objects)
 
 # mark a few targets as not producing files
 .PHONEY: all run test clean 
 ````
+
+A toy project that uses this makefile [is available](files/make_example.tar)
+and can be expanded from the command line with `tar vxf make_example.tar`{.bash}
