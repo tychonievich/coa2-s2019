@@ -50,7 +50,7 @@ test: tester
 
 # genetic rule to build a .o from any .c
 # see https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html
-%.o: %.c %h
+%.o: %.c %.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 
