@@ -4,8 +4,10 @@ title: Minimal makefiles
 
 In this class, you will generally submit multiple files for each assignment
 with an accompanying makefile to help us run them.
-Makefiles are quite powerful and, while sometimes considered antequated compared to tools like ant, buildr, gradle, ivy, maven, and scons, it remains the workhorse of the GNU and Linux worlds.
-You're welcome to [read a lot more](https://www.gnu.org/software/make/manual/) than this one summary if you wish.
+Makefiles are quite powerful and, while sometimes considered antiquated compared to tools like [cmake](https://cmake.org), [gradle](https://gradle.org), and [scons](https://scons.org),
+it remains a dominant build automation tool in the GNU and Linux ecosystems.
+You're welcome to [read a lot more](https://www.gnu.org/software/make/manual/)
+than this one example summary if you wish.
 
 
 The following is a base makefile for our course
