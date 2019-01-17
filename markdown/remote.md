@@ -63,6 +63,7 @@ To push files from your computer to the servers
         - `*` means "all files in the current directory"
         - `mst3k` is your computing ID
         - `code/project/directory/` is the path to the directory on the department servers where your code will live.
+            
             You may have to create this directory on the department servers first.
 
 To run commands remotely
