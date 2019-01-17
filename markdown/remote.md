@@ -58,17 +58,21 @@ You should put each program in its own folder in this course.
 
 To push files from your computer to the servers
 :   1. Open the terminal or command prompt your operating system supports
+
     2. Change to the directory of your code
+
     3. Run `scp * mst3k@portal.cs.virginia.edu:code/project/directory/`, where
+
         - `*` means "all files in the current directory"
         - `mst3k` is your computing ID
         - `code/project/directory/` is the path to the directory on the department servers where your code will live.
-            
             You may have to create this directory on the department servers first.
 
 To run commands remotely
 :   1. Open the terminal or command prompt your operating system supports
+
     2. Run `ssh mst3k@portal.cs.virginia.edu "the command you want to run on the server"`, where
+
         - `mst3k` is your computing ID
         - `the command you want to run on the server` is a valid linux command, which may be several commands separated by `;`
             
