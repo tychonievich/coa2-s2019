@@ -94,14 +94,16 @@ If you take notes on any installation nuances and post them on Piazza,
 I'm sure your fellow students would apprecite that.
 
 Windows
-:
-    - Clang via <http://releases.llvm.org/download.html>
+:   - Clang via <http://releases.llvm.org/download.html>
+ 
     - Make via <http://gnuwin32.sourceforge.net/packages/make.htm>
+ 
     - I didn't find a clean-looking LLDB installation guide
 
 MacOS
-:
-    - Clang via `xcode-select --install`
+:   - Clang via `xcode-select --install`
+  
     - I didn't find a clean-looking Make installation guide, but it might come with clang?
+  
     - I didn't find a clean-looking LLDB installation guide, but it might come with clang?
 
