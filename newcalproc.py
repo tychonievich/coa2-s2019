@@ -394,13 +394,13 @@ def calendar(data, linkfile):
                     if not details['reading']: details.pop('reading')
                     if not details['_reading']: details.pop('_reading')
                 
-                if d in linkfile:
+                if d.date() in linkfile:
                     links = []
-                    for k,v in linkfile[d].items():
+                    for k,v in linkfile[d.date()].items():
                         if k in ['mp3','webm']: continue
                         if k != 'files':
                             links.append('['+k+']('+v+')')
-                    links.extend('['+os.path.basename(_).replace('.html','')+']('+_+')' for _ in linkfile[d].get('files',[]))
+                    links.extend('['+os.path.basename(_).replace('.html','')+']('+_+')' for _ in linkfile[d.date()].get('files',[]))
                     details['links'] = ' (lecture: '+l2s(links, md=markdown.markdown)+')'
 
                 ans.append((d.timestamp(), details))
@@ -727,6 +727,7 @@ def tomarkdown(f, links=None):
         links = load(links, Loader=Loader)
 
     default_tz = pytz.timezone(data['meta'].get('timezone', 'America/New_York'))
+    print(links)
     events = calendar(data, links)
 
     with open('markdown/cal.ics', 'w') as ic:
