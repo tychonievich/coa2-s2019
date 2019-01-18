@@ -321,7 +321,7 @@ def l2s(l, join=' <small>and</small> ', md=lambda x:x):
 def plusMin(date, minutes):
     return date + datetime.timedelta(0,minutes*60)
 
-def calendar(data):
+def calendar(data, linkfile):
     """Given a yaml file, creates a calendar: a date-sorted sequence of entries
     Each entry contains some subset of
     
@@ -393,6 +393,16 @@ def calendar(data):
                     details['_reading'] = flatten([data['reading'][_] for _ in top if _ in data['reading']])
                     if not details['reading']: details.pop('reading')
                     if not details['_reading']: details.pop('_reading')
+                
+                if d in linkfile:
+                    links = []
+                    for k,v in linkfile[d].items():
+                        if k in ['mp3','webm']: continue
+                        if k != 'files':
+                            links.append('['+k+']('+v+')')
+                    links.extend('['+os.path.basename(_).replace('.html','')+']('+_+')' for _ in linkfile[d].get('files',[]))
+                    details['links'] = ' (lecture: '+l2s(links, md=markdown.markdown)+')'
+
                 ans.append((d.timestamp(), details))
                 d = nextDOW(d, sdat['days'], skip=skip)
             while day(d) <= day(data['Special Dates']['Courses end']):
@@ -564,13 +574,14 @@ def toHtml(events, sections=None):
         if not haveContent:
             haveContent = True
             body.append('<div class="content">')
-        body.append(re.sub('<a href="">(.*?)</a>',r'\1','<div class="event {type} {section}"><time datetime="{dt}">{time}</time><a href="{link}">{title}</a><div class="details">{details}</div><div class="reading">{reading}</div></div>'.format(
+        body.append(re.sub('<a href="">(.*?)</a>',r'\1','<div class="event {type} {section}"><time datetime="{dt}">{time}</time><a href="{link}">{title}</a><div class="details">{details}</div><div class="reading">{reading}{links}</div></div>'.format(
             link=event.get('link',''),
             title=event.get('title', 'TBA'),
             type=event.get('type',''),
             details=event.get('details',''),
             section=event.get('section',''),
             reading=event.get('reading',''),
+            links=event.get('links',''),
             dt=event['start'].strftime('%Y-%m-%dT%H:%M:%S'),
             time=event['start'].strftime('%H:%M '),
         ).replace('<div class="details"></div>','').replace('<div class="reading"></div>','')))
@@ -700,7 +711,7 @@ def yamlfile(f):
         /* .today {{ box-shadow: 0 0 1ex 1ex #ffddcc; }} */
         </style></head><body>{}</body></html>'''.format(toHtml(events)), file=hm)
 
-def tomarkdown(f):
+def tomarkdown(f, links=None):
     global default_tz
 
     if type(f) is str:
@@ -709,8 +720,14 @@ def tomarkdown(f):
     else:
         data = load(f, Loader=Loader)
 
+    if type(links) is str:
+        with open(links) as stream:
+            links = load(stream, Loader=Loader)
+    elif links is not None:
+        links = load(links, Loader=Loader)
+
     default_tz = pytz.timezone(data['meta'].get('timezone', 'America/New_York'))
-    events = calendar(data)
+    events = calendar(data, links)
 
     with open('markdown/cal.ics', 'w') as ic:
         print(toIcal(events), file=ic)
@@ -739,4 +756,4 @@ if __name__ == '__main__':
 
     if not done:
         fixworking()
-        tomarkdown('newcal.yaml')
+        tomarkdown('newcal.yaml', 'links.yaml')
