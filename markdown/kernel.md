@@ -117,10 +117,34 @@ A trap is an exception caused by a special instruction whose sole job is to gene
 Traps are the main mechanism for intentionally switching from user mode to kernel mode and are the core of all system calls.
 System calls are used to interact with the file system, spawn and wait on threads, listen for key presses, and anything else that you cannot do with simple code alone.
 
+{.aside ...} Aborts
+
+The above text classifies exception by cause.
+Some texts classify them by result instead,
+and if so classified there is a fourth class: aborts, which never return.
+
+Fault
+:   re-runs triggering instruction
+
+Trap
+:   runs instruction after triggering instruction
+
+Interrupt
+:   runs each instruction once (has no triggering instruction)
+
+Abort
+:   stops running instructions
+
+The abort result may be triggered by any cause:
+if a memory access detects memory inconsistency we have an aborting fault;
+an exit system call is an aborting trap;
+and integral peripherals like RAM can often send aborting interrupts if they notice unrecoverable problems.
+{/}
+
 
 ## Handling
 
-When an exception occurs, the processor switched to kernel mode and jumping to a special function in kernel code called an "exception handler."
+When an exception occurs, the processor switches to kernel mode and jumps to a special function in kernel code called an "exception handler."
 Because interrupts exist, this can happen without any particular instruction causing the jump,
 and thus might happen at any point during the code running.
 In order for the handler to later resume user code, the exception handling process must also save the processor state before executing the handler.

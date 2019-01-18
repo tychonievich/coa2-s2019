@@ -52,9 +52,9 @@ extern ulong ptbr;
 ulong translate(ulong va);
 
 /**
- * Use malloc to create page tables sufficient to have a mapping between
- * the given virtual address and some physical address. If there already 
- * is such a page, does nothing.
+ * Use posix_memalign to create page tables sufficient to have a mapping
+ * between the given virtual address and some physical address. If there
+ * already is such a page, does nothing.
  */
 void page_allocate(ulong va);
 ```
@@ -69,6 +69,8 @@ If `ptbr` is not `NULL`, it should point to an array of `ulong`s
 occupying 2^`POBITS`^ bytes.
 Each such `ulong` should be interpreted as a page table entry.
 
+{.note} Some texts refer to a PTBR containing a physical address; others to it containing a physical page number. The above definition asserts it contains a physical address, not page number. As such, it will always have 0 in its low-order `POBITS` bits.
+
 Each page table entry should be either
 
 0 in the low-order bit
@@ -80,9 +82,9 @@ Each page table entry should be either
     {.example} PTE `0x1234567812345678` has a zero in the low-order bit, and thus indicates the absence of a physical page.
 
 1 in the low-order bit
-:   The bits above the `POBITS` bit are the physical page number of either
+:   The bits above the `POBITS` low-order bits are the physical page number of either
     the next level page table or the physical page of memory.
-    The `POBITS` − 1 low-order bits above the lowest-order 1 bit
+    The `POBITS` − 1 low-order bits (excluding the 1 in the lowest-order bit)
     have no defined meaning; you may use them
     however you wish.
 
