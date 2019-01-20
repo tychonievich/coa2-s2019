@@ -713,31 +713,39 @@ def yamlfile(f):
 
 def tomarkdown(f, links=None):
     global default_tz
+    
+    import touch
+    check = []
 
     if type(f) is str:
+        check.append(f)
         with open(f) as stream:
             data = load(stream, Loader=Loader)
     else:
         data = load(f, Loader=Loader)
 
     if type(links) is str:
+        check.append(links)
         with open(links) as stream:
             links = load(stream, Loader=Loader)
     elif links is not None:
         links = load(links, Loader=Loader)
 
     default_tz = pytz.timezone(data['meta'].get('timezone', 'America/New_York'))
-    print(links)
     events = calendar(data, links)
 
     with open('markdown/cal.ics', 'w') as ic:
         print(toIcal(events), file=ic)
+    touch.set_oldest('markdown/cal.ics', *check)
     with open('markdown/schedule.html', 'w') as hm:
         print(toHtml(events), file=hm)
+    touch.set_oldest('markdown/schedule.html', *check)
     with open('assignments.json', 'w') as f:
         f.write(prettyjson(assignments_json(data)))
+    touch.set_oldest('assignments.json', *check)
     with open('coursegrade.json', 'w') as f:
         f.write(prettyjson(coursegrade_json(data), maxinline=16))
+    touch.set_oldest('coursegrade.json', *check)
 
 
 
