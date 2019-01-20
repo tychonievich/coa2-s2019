@@ -93,6 +93,7 @@ reading:
     DMA: '[kernels §3.4.4](kernel.html#direct-memory-access)'
     caches: '[caches](cache.html)'
     user accounts: '[accounts](accounts.html)'
+    privilege escalation: '[wikipedia](https://en.wikipedia.org/wiki/Privilege_escalation)'
 
 assignments:
     ".groups":
