@@ -27,7 +27,7 @@ Do not be surprised if/when the schedule changes.
 
 {#include schedule.html}
 
-To subscribe to the above calendar, add <http://www.cs.virginia.edu/luther/COA2/F2019/cal.ics> to your calender application of choice.
+To subscribe to the above calendar, add <http://www.cs.virginia.edu/luther/COA2/S2019/cal.ics> to your calender application of choice.
 
 <hr/>
 
