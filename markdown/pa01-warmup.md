@@ -14,7 +14,8 @@ Write the following files:
     If there are command-line arguments,
     convert each to an integer and invoke `pprime` with each.
     If there are no command line arguments,
-    read integers from standard input until the end of standard input is reached
+    read integers from standard input (provided in base-10, one number per line)
+    until the end of standard input is reached
     and invoke `pprime` with each integer.
     `main` should not print anything itself.
 
