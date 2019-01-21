@@ -98,6 +98,16 @@ is running with that user in the operating system's bookkeeping for that process
 Since a process typically opens up other processes using the same account,
 that means that all the processes you run from this session will be under that same user.
 
+{.aside ...}
+There are alternatives to having one account per user.
+For example, Android, which is based on the Linux kernel and thus has the same basic user account mechanisms as we describe here,
+creates [a different user account for each app](https://source.android.com/security/app-sandbox).
+Thus the user interface user can become any app's user when launching the app,
+and different apps cannot (by default) access files created for one another.
+When apps are installed, Android not only installs its files
+but also creates a user account for it and provides a list of permissions for that account.
+{/}
+
 # One account to rule them all
 
 Typically, operating systems have one special account
