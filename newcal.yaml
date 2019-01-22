@@ -118,6 +118,11 @@ assignments:
         due: 2019-01-25 14:00:00
         files: [main.c, primes.c, primes.h, Makefile]
 
+    PA02:
+        title: 'page tables'
+        link: pa02-pagetable.html
+        due: 2019-01-25 14:00:00
+        files: [*.c, *.h, Makefile]
 
 
     Quiz01:

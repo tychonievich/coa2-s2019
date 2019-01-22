@@ -129,6 +129,17 @@ int main() {
 ```
 {/}
 
+# Submission
+
+You should submit code, with a Makefile, that
+
+- Will work if I move the given `mlpt.h` and `config.h` into the directory with them, overwriting those you submit (if any)
+- Meets all above specifications
+
+Because we require no main function, you are welcome to have a target to build a program or not, at your preference.
+We'll test by compiling adding our own tester program, though, so if you do have a `main`
+make sure it is not in a file required to build your code (i.e., keep `main` in a different file than your implementations of `translate`, `page_allocate`, and `ptbr`).
+
 # Tips
 
 To test your code, you'll likely have to add extra code to let you measure things like the number of pages allocated.
