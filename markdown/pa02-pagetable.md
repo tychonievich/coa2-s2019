@@ -35,39 +35,37 @@ As an exception, it does not need to (but may) support cases where
 You are welcome to edit it, provided such edits will not cause testing code to fail to compile.
 
 ```c
-typedef unsigned long long ulong;
-
 /**
  * Page table base register.
  * Declared here so tester code can look at it; because it is extern
  * you'll need to define it (without extern) in exactly one .c file.
  */
-extern ulong ptbr;
+extern size_t ptbr;
 
 /**
  * Given a virtual address, return the physical address.
  * Return a value consisting of all 1 bits
  * if this virtual address does not have a physical address.
  */
-ulong translate(ulong va);
+size_t translate(size_t va);
 
 /**
  * Use posix_memalign to create page tables sufficient to have a mapping
  * between the given virtual address and some physical address. If there
  * already is such a page, does nothing.
  */
-void page_allocate(ulong va);
+void page_allocate(size_t va);
 ```
 
 ## Behavior
 
 Prior to the first invocation of `page_allocate`, `ptbr` should be `NULL`;
-thereafter it should be a pointer to a heap-allocated array, cast as a `ulong`.
+thereafter it should be a pointer to a heap-allocated array, cast as a `size_t`.
 It should not change after the first `page_allocate` invocation.
 
-If `ptbr` is not `NULL`, it should point to an array of `ulong`s
+If `ptbr` is not `NULL`, it should point to an array of `size_t`s
 occupying 2^`POBITS`^ bytes.
-Each such `ulong` should be interpreted as a page table entry.
+Each such `size_t` should be interpreted as a page table entry.
 
 {.note} Some texts refer to a PTBR containing a physical address; others to it containing a physical page number. The above definition asserts it contains a physical address, not page number. As such, it will always have 0 in its low-order `POBITS` bits.
 
@@ -96,13 +94,19 @@ No pages should be allocated unless requested by a call to `page_allocate`.
 assuming that `LEVELS` is 4 and `POBITS` is 12.
 
 ```c
+
+#include <stdio.h>
+#include <assert.h>
+#include "mlpt.h"
+#include "config.h"
+
 int main() {
     // 0 pages have been allocated
-    assert(ptbr == NULL);
+    assert(ptbr == 0);
 
     page_allocate(0x123456789abcdef);
     // 5 pages have been allocated: 4 page tables and 1 data
-    assert(ptbr != NULL);
+    assert(ptbr != 0);
 
     page_allocate(0x123456789abcd00);
     // no new pages allocated (still 5)
@@ -110,7 +114,7 @@ int main() {
     int *p1 = (int *)translate(0x123456789abcd00);
     *p1 = 0xaabbccdd;
     short *p2 = (short *)translate(0x123456789abcd02);
-    printf("%04x\n", *p2); // prints "aabb\n"
+    printf("%04hx\n", *p2); // prints "aabb\n"
 
     assert(translate(0x123456789ab0000) == 0xFFFFFFFFFFFFFFFF);
     
@@ -123,3 +127,19 @@ int main() {
     // 2 new pages allocated (now 8; 5 page table, 3 data)
 }
 ```
+{/}
+
+# Tips
+
+To test your code, you'll likely have to add extra code to let you measure things like the number of pages allocated.
+
+A tip for good functional design: if you can describe what a non-trivial piece of code is doing, make it its own function with that action as its name. I'd encourage having names for all of the steps of address translation that we discussed in lectures.
+
+Since we haven't used `posix_memalign`{.c} before and it's manual page is a bit confusing, the code I used to use it was
+
+```c
+void *ans;
+posix_memalign(&ans, 1<<POBITS, 1<<POBITS);
+```
+
+You will likely find yourself casting between `size_t` and various pointer types multiple places in your code.
