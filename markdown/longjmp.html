@@ -124,18 +124,18 @@ function set_time(n) {
         case 12: 
         document.querySelector('#l21').classList.add('active'); 
         document.querySelector('#n').innerHTML = 1; 
-        document.querySelector('#got').innerHTML = 1; 
+        document.querySelector('#got').innerHTML = 123; 
         break;
         case 13: 
         document.querySelector('#l22').classList.add('active'); 
         document.querySelector('#n').classList.add('active'); 
         document.querySelector('#n').innerHTML = 6; 
-        document.querySelector('#got').innerHTML = 1; 
+        document.querySelector('#got').innerHTML = 123; 
         break;
         case 14: 
         document.querySelector('#l27').classList.add('active'); 
         document.querySelector('#n').innerHTML = 6; 
-        document.querySelector('#got').innerHTML = 1; 
+        document.querySelector('#got').innerHTML = 123; 
         break;
     }
 }
@@ -160,7 +160,7 @@ function bkw() {
 <div class="line"  id="l5"></div>
 <div class="line"  id="l6">void b() {</div>
 <div class="line"  id="l7">    n = 1;</div>
-<div class="line"  id="l8">    <span id="longjmp">longjmp(env, 1)</span>;</div>
+<div class="line"  id="l8">    <span id="longjmp">longjmp(env, 123)</span>;</div>
 <div class="line"  id="l9">    n = 2;</div>
 <div class="line" id="l10">}</div>
 <div class="line" id="l11"></div>
