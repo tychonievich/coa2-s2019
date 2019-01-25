@@ -488,6 +488,8 @@ prints
     main3: n = 4
     main4: n = 5
     end of main
+
+See also a [step-by-step simulation](longjmp.html) of this same process without the `printf`s.
 {/}
 
 There was a time when `setjmp`/`longjmp` were seen as effective ways of achieving
