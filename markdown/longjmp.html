@@ -48,40 +48,49 @@ function set_time(n) {
         case 0: 
         document.querySelector('#l18').classList.add('active'); 
         document.querySelector('#n').innerHTML = 0; 
+        document.querySelector('#got').innerHTML = ''; 
         break;
         case 1: 
         document.querySelector('#l19').classList.add('active'); 
         document.querySelector('#n').classList.add('active'); 
         document.querySelector('#n').innerHTML = 5; 
+        document.querySelector('#got').innerHTML = ''; 
         break;
         case 2: 
         document.querySelector('#l20').classList.add('active'); 
         document.querySelector('#n').innerHTML = 5; 
+        document.querySelector('#got').classList.add('active'); 
+        document.querySelector('#got').innerHTML = 0; 
         break;
         case 3: 
         document.querySelector('#l21').classList.add('active'); 
         document.querySelector('#l23').classList.add('active'); 
         document.querySelector('#n').innerHTML = 5; 
+        document.querySelector('#got').innerHTML = 0; 
         break;
         case 4: 
         document.querySelector('#l24').classList.add('active'); 
         document.querySelector('#n').classList.add('active'); 
         document.querySelector('#n').innerHTML = 7; 
+        document.querySelector('#got').innerHTML = 0; 
         break;
         case 5: 
         document.querySelector('#l25').classList.add('active'); 
         document.querySelector('#n').innerHTML = 7; 
+        document.querySelector('#got').innerHTML = 0; 
         break;
         case 6: 
         document.querySelector('#a').classList.add('suspended'); 
         document.querySelector('#l13').classList.add('active'); 
         document.querySelector('#n').classList.add('active'); 
         document.querySelector('#n').innerHTML = 3; 
+        document.querySelector('#got').innerHTML = 0; 
         break;
         case 7: 
         document.querySelector('#a').classList.add('suspended'); 
         document.querySelector('#l14').classList.add('active'); 
         document.querySelector('#n').innerHTML = 3; 
+        document.querySelector('#got').innerHTML = 0; 
         break;
         case 8: 
         document.querySelector('#a').classList.add('suspended'); 
@@ -89,12 +98,14 @@ function set_time(n) {
         document.querySelector('#l7').classList.add('active'); 
         document.querySelector('#n').classList.add('active'); 
         document.querySelector('#n').innerHTML = 1; 
+        document.querySelector('#got').innerHTML = 0; 
         break;
         case 9: 
         document.querySelector('#a').classList.add('suspended'); 
         document.querySelector('#b').classList.add('suspended'); 
         document.querySelector('#l8').classList.add('active'); 
         document.querySelector('#n').innerHTML = 1; 
+        document.querySelector('#got').innerHTML = 0; 
         break;
         case 10: 
         document.querySelector('#a').classList.add('suspended'); 
@@ -102,23 +113,29 @@ function set_time(n) {
         document.querySelector('#longjmp').classList.add('active'); 
         document.querySelector('#setjmp').classList.add('active'); 
         document.querySelector('#n').innerHTML = 1; 
+        document.querySelector('#got').innerHTML = 0; 
         break;
         case 11: 
         document.querySelector('#l20').classList.add('active'); 
         document.querySelector('#n').innerHTML = 1; 
+        document.querySelector('#got').innerHTML = 1; 
+        document.querySelector('#got').classList.add('active'); 
         break;
         case 12: 
         document.querySelector('#l21').classList.add('active'); 
         document.querySelector('#n').innerHTML = 1; 
+        document.querySelector('#got').innerHTML = 1; 
         break;
         case 13: 
         document.querySelector('#l22').classList.add('active'); 
         document.querySelector('#n').classList.add('active'); 
         document.querySelector('#n').innerHTML = 6; 
+        document.querySelector('#got').innerHTML = 1; 
         break;
         case 14: 
         document.querySelector('#l27').classList.add('active'); 
         document.querySelector('#n').innerHTML = 6; 
+        document.querySelector('#got').innerHTML = 1; 
         break;
     }
 }
@@ -139,7 +156,7 @@ function bkw() {
 <div class="line"  id="l1">#include &lt;setjmp.h&gt;</div>
 <div class="line"  id="l2"></div>
 <div class="line"  id="l3">jmp_buf env;</div>
-<div class="line"  id="l4">int n = 0;      // current value: <span id="n">0</span></div>
+<div class="line"  id="l4">int n = 0;      // n = <span id="n">0</span></div>
 <div class="line"  id="l5"></div>
 <div class="line"  id="l6">void b() {</div>
 <div class="line"  id="l7">    n = 1;</div>
@@ -155,7 +172,7 @@ function bkw() {
 <div class="line" id="l17"></div>
 <div class="line" id="l18">int main() {</div>
 <div class="line" id="l19">    n = 5;</div>
-<div class="line" id="l20">    int got = <span id="setjmp">setjmp(env)</span>;</div>
+<div class="line" id="l20">    int got = <span id="setjmp">setjmp(env)</span>; // got = <span id="got"></span></div></div>
 <div class="line" id="l21">    if (got) {</div>
 <div class="line" id="l22">        n = 6;</div>
 <div class="line" id="l23">    } else {</div>
