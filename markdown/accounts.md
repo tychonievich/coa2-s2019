@@ -65,12 +65,13 @@ Let's take this line apart bit by bit:
 :	Processes running under any user account other than `mst3k` and not belonging to the group `wheel` are not allowed to read, write, or execute it.
 
 `371`
-:	The file is 371 bytes
+:	The file contains 371 bytes of data.
+	This does not include its metadata: the filename, permissions, etc, listed here.
 
 `Jan 18  2019`
 :	The file claims to have been last modified on `2019-01-18`.
 
-`baz`
+`file.txt`
 :	The name of the file is `file.txt`
 
 Every piece of this is metadata stored on the disk with the file.
