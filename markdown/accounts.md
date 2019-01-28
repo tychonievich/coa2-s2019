@@ -171,17 +171,18 @@ but one of them is to provide controlled, limited access to a different user acc
 {.example ...}
 Most Linux systems use CUPS^[formerly "the Common UNIX Printing System" but officially changes to just CUPS due to trademark disputes about the use of the word UNIX] to manage printing;
 CUPS runs primarily^[see [the CUPS design overview](https://www.cups.org/doc/spec-design.html) for how `cupsd` this works with the other components of CUPS] as a daemon `cupsd`.
-Because printing can involve large amounts of data being fed slowly though a mechanical device,
+Because printing can involve large amounts of data being fed slowly though a mechanical device^[among other reasons...],
 print jobs are "spooled" into files temporarily while being printed.
 Since we don't want other programs to be able to see the contents of the print jobs we have pending, we want those files to be locked down to a special user account.
-On a default installation, that account is `root`.
+On a default installation, that account is `root`,
+meaning `cupsd` needs to run as the `root` user.
 
 When a program wants to print, it contacts `cupsd`
 (typically via a socket)
 and sends it the information about the print job in question.
-Because `cupsd` is running as `root`, it can spool that information on to a file owned by `root`, and thus inaccessible to non-`root` users,
-or send it directly to the printer by accessing system calls
-the OS restricts to the `root` account.
+Because `cupsd` is running as `root`, it can spool that information to a file owned by `root`, and thus inaccessible to non-`root` users,
+and send it to a printer by accessing system calls
+that the OS restricts to the `root` account.
 {/}
 
 # What is "the operating system"?
