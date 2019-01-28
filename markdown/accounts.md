@@ -169,8 +169,8 @@ There are various purposes to having a daemon,
 but one of them is to provide controlled, limited access to a different user account.
 
 {.example ...}
-Most Linux systems use the Common Unix Printing System (CUPS),
-which runs primarily as a daemon `cupsd`.
+Most Linux systems use CUPS^[formerly "the Common UNIX Printing System" but officially changes to just CUPS due to trademark disputes about the use of the word UNIX] to manage printing;
+CUPS runs primarily^[see [the CUPS design overview](https://www.cups.org/doc/spec-design.html) for how `cupsd` this works with the other components of CUPS] as a daemon `cupsd`.
 Because printing can involve large amounts of data being fed slowly though a mechanical device,
 print jobs are "spooled" into files temporarily while being printed.
 Since we don't want other programs to be able to see the contents of the print jobs we have pending, we want those files to be locked down to a special user account.
