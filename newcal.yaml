@@ -40,7 +40,7 @@ lectures:
     - privilege escalation
     - virtual memory
     - virtual memory
-    - [busses, DMA]
+    - [buses, DMA]
     - [UDP, TCP, IP]
     - [ports, DNS]
     - [spoofing, snooping]
@@ -91,6 +91,7 @@ reading:
     caches: '[caches](cache.html)'
     user accounts: '[accounts](accounts.html)'
     privilege escalation: '[wikipedia](https://en.wikipedia.org/wiki/Privilege_escalation)'
+    buses: '[bus and network](bus.html)'
 
 assignments:
     ".groups":
