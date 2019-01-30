@@ -40,10 +40,7 @@ lectures:
     - privilege escalation
     - virtual memory
     - virtual memory
-    - process isolation
-    
-    - busses
-    - DMA
+    - [busses, DMA]
     - [UDP, TCP, IP]
     - [ports, DNS]
     - [spoofing, snooping]
