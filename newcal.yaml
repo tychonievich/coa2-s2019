@@ -85,7 +85,7 @@ reading:
     spectre: <https://meltdownattack.com/>
     interrupts: '[kernels §2](kernel.html#exceptions)'
     privilege: '[kernels §1](kernel.html)'
-    virtual memory: '[kernels §3](kernel.html#virtual-memory)'
+    virtual memory: ['[kernels §3](kernel.html#virtual-memory)','[worksheet](https://kytos.cs.virginia.edu/coa2-s2019/vmem/)']
     process issolation: '[kernels](kernel.html)'
     DMA: '[kernels §3.4.4](kernel.html#direct-memory-access)'
     caches: '[caches](cache.html)'
