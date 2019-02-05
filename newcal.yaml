@@ -92,6 +92,8 @@ reading:
     user accounts: '[accounts](accounts.html)'
     privilege escalation: '[wikipedia](https://en.wikipedia.org/wiki/Privilege_escalation)'
     buses: '[bus and network](bus.html)'
+    IP: '[protocols](protocols.html)'
+    
 
 assignments:
     ".groups":
