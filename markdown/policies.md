@@ -43,9 +43,9 @@ However, we do know you will be asked to
 
 |        | Instructor | TAs |
 |--------|------------|-----|
-| Name | Luther Tychonievich | TBA |
+| Name | Luther Tychonievich | Anders Christoffersen, Rossi McCall |
 | Location | Rice 208 | Thornton Stacks (A235) |
-| Office Hours | Monday 10--1am; Thursday 1--2pm and 5--6pm; Friday 11am--12 |   |
+| Office Hours | Monday 10--1am; Thursday 1--2pm and 5--6pm; Friday 11am--12 | Monday 4--6pm |
 | Phone | 243-3789 | (none) |
 | Email | <a href="mailto:tychonievich@virginia.edu?subject=COA2">tychonievich@virginia.edu</a> | use [Piazza](https://piazza.com/class/jqwcpou09v64k1) |
 
