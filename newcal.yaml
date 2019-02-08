@@ -41,8 +41,9 @@ lectures:
     - virtual memory
     - virtual memory
     - [buses, DMA]
-    - [UDP, TCP, IP]
-    - [ports, DNS]
+    - IP
+    - [UDP, TCP, ports]
+    - [DNS]
     - [spoofing, snooping]
     - TLS
     - caches
