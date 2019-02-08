@@ -27,7 +27,7 @@ your code should create a 3-level page table instead of a 4-level page table.
 Your code should work for all integer values of `LEVELS` between `1` and `6` inclusive
 and all integer values of `POBITS` between `4` and `18` inclusive.
 As an exception, it does not need to (but may) support cases where 
-(`POBITS` − 3) × `LEVELS` > 6.
+(`POBITS` − 3) × (`LEVELS` + 1) > 60.
 
 ## `mlpt.h`
 
