@@ -111,3 +111,14 @@ MacOS
   
     - I didn't find a clean-looking LLDB installation guide, but it might come with clang?
 
+Windows, with WSL
+:   Windows ships with the ability to enable some POSIX-compliant features
+    and then install an entire open-source OS to run inside Windows.
+    
+    See <https://docs.microsoft.com/en-us/windows/wsl/install-win10> for instructions.
+
+# ssh without X-forwarding
+
+Try running `ssh mst3k@portal.cs.virginia.edu` and then using command-line tools like `nano`.
+This is likely to have many little issues if you run Windows, as `ssh` is designed assuming POSIX-compliance and Windows is not POSIX-compliant.
+It should basically work, but you might have to put up with things like backspace not working, etc.
