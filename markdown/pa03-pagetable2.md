@@ -25,6 +25,12 @@ add a description of what your code cannot do to the `README`.
 
 Code reviews will occur after PA03 closes. To prepare for these
 
+- Ensure there are no warnings^[
+		...because you resolved the warnings,
+		not because you disabled them with warning-ignoring `#pragma`s or the like.
+	] when compiling.
+	To put this another way, adding `-Wall -Werror` to your `Makefile`'s `CFLAGS` should not prevent compilation.
+
 - Use the following style: 
 	- 4-space indentation
 	- `{`{.c} on the previous line and `}`{.c} on a line by itself
