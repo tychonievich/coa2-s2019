@@ -94,6 +94,8 @@ reading:
     privilege escalation: '[wikipedia](https://en.wikipedia.org/wiki/Privilege_escalation)'
     buses: '[bus and network](bus.html)'
     IP: '[protocols §1--2](protocols.html)'
+    UDP: '[protocols §2.2](protocols.html#udp)'
+    TCP: '[protocols §2.3](protocols.html#tcp)'
     DNS: '[protocols §3](protocols.html#urls)'
     
 
@@ -123,8 +125,11 @@ assignments:
     PA02:
         title: 'page tables'
         link: pa02-pagetable.html
-        due: 2019-02-11 14:00:00
+        due: 2019-02-13 14:00:00
         files: ["*.c", "*.h", Makefile]
+    
+    PA03:
+        due: 2019-02-22 14:00:00
 
 
     Quiz01:
