@@ -21,6 +21,8 @@ Your code should pass every test they have.
 If you cannot pass every test by the deadline,
 add a description of what your code cannot do to the `README`.
 
+Note if you submitted a file you don't want, there is currently no way to remove it. However, you can upload an empty file with the same name to remove it from what happens.
+
 ## Prepare for code review
 
 Code reviews will occur after PA03 closes. To prepare for these
@@ -66,6 +68,16 @@ Prepare your code for delivery. In particular,
 - Adjust your `Makefile` to have, as its default target, `mlpt.a`,
 	a library with exported symbols including the three defined in `mlpt.h`
 	and not including `main`.
+	
+	A typical command might look like
+	
+	````makefile
+	mlpt.a: $(objects)
+		ar rcs mlpt.a $(objects)
+	````
+	
+	The default (what happens if you just type `make`)
+	is the first target in the Makefile.
 
 - Write a `README` explaining (at a minimum)
 	- How to customize `config.h`, with some guidance on how to pick values for that file.
