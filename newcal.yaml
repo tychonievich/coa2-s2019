@@ -43,7 +43,7 @@ lectures:
     - [buses, DMA]
     - IP
     - [UDP, TCP, ports]
-    - [DNS]
+    - [DNS, DHCP]
     - [spoofing, snooping]
     - TLS
     - caches
@@ -97,7 +97,8 @@ reading:
     UDP: '[protocols §2.2](protocols.html#udp)'
     TCP: '[protocols §2.3](protocols.html#tcp)'
     DNS: '[protocols §3](protocols.html#urls)'
-    
+    DHCP: '[wikipedia](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol)'
+    spoofing: '[wikipedia](https://en.wikipedia.org/wiki/IP_address_spoofing)'
 
 assignments:
     ".groups":
