@@ -36,8 +36,8 @@ Code reviews will occur after PA03 closes. To prepare for these
 		Replacing with either prefix `++`{.c} or `+= 1`{.c} is OK.
 	- Lower-case identifiers with underscores separating words
 	- Upper-case `#define`{.c} constants
-	- `typedef`{.c} such that all type names are single identifiers 
-		(e.g., no `unsigned char`{.c} except as part of a `typedef`; `short ***`{.c} is fine, though).
+	- `typedef`{.c} such that each type name uses a single identifier
+		(e.g., no `unsigned char`{.c} except as part of a `typedef`).
 
 - Use variable names that indicate the meaning of the contents of the variable;
 	function names that indicate the purpose of the function;
@@ -51,7 +51,7 @@ Code reviews will occur after PA03 closes. To prepare for these
 	- Comments should be present to describe any esoteric code decisions.
 	- All code should have a clear purpose.
 
-- Have in-code documentation inside a comment beginning `/**` immediately before each non-trivial function.
+- Have in-code documentation inside a comment beginning `/**` or `///` immediately before each non-trivial function. Ensure all non-documentation comments use `//` or `/*` instead.
 
 ## Prepare for delivery
 
