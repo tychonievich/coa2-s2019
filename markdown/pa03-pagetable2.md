@@ -129,7 +129,7 @@ Your boss sent you an email:
 > See if you can add some kind of de-allocate interface. If so, add it to 
 > `mlpt.h` and document how it is used. If, as I suspect, it is trickier
 > than it sounds, include some explanation of what complicates it to the 
-> `README`.
+> `README` instead of implementing it.
 >
 > Sorry about this.
 

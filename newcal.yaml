@@ -122,12 +122,14 @@ assignments:
         link: pa01-warmup.html
         due: 2019-01-25 14:00:00
         files: [main.c, primes.c, primes.h, Makefile]
+        rubric: {"kind":"percentage"}
 
     PA02:
         title: 'page tables'
         link: pa02-pagetable.html
         due: 2019-02-13 14:00:00
         files: ["*.c", "*.h", Makefile]
+        rubric: {"kind":"percentage"}
     
     PA03:
         due: 2019-02-22 14:00:00
