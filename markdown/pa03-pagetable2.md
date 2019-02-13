@@ -106,11 +106,10 @@ Include a file named `licenses.txt` in which you list at least three licenses yo
 a short (sentence or two) summary of what they seemed to say;
 and why you chose to or not to use each as your license.
 
-Your review should include 
+Your review should include at least three licenses, including
 
 - at least one of GPL or LGPL
 - at least one of MIT, BSD, Boost, Apache, SQLite
-- at least one other not listed above
 
 All should be *software* licenses; this excludes licenses
 such as the various CC licenses for creative works,
