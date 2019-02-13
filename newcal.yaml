@@ -123,18 +123,21 @@ assignments:
         due: 2019-01-25 14:00:00
         files: [main.c, primes.c, primes.h, Makefile]
         rubric: {"kind":"percentage"}
+        weight: 0.5
 
     PA02:
         title: 'page tables'
         link: pa02-pagetable.html
-        due: 2019-02-13 14:00:00
+        due: 2019-02-13 14:30:00
         files: ["*.c", "*.h", Makefile]
         rubric: {"kind":"percentage"}
     
     PA03:
+        title: 'page tables part 2'
+        link: pa03-pagetable2.html
         due: 2019-02-22 14:00:00
         open: 2019-02-13 14:00:00
-        files: ["*.c", "*.h", Makefile, README, LICENSE, ACKNOWLEDGEMENTS, '*']
+        files: ["*.c", "*.h", Makefile, README, LICENSE, ACKNOWLEDGEMENTS, "licenses.txt", '*']
 
 
     Quiz01:
