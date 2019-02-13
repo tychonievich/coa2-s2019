@@ -17,7 +17,7 @@ they will neither tell you their specific test cases
 nor promise not to add additional tests without warning.
 This withheld information should help you avoid over-fitting your code to their specific tests.
 
-Your code should pass every test they have.
+Your code should pass every test they have^[We recognize this will be harder for some than for others based on how far you started from this goal; to avoid double-jeopardy, we'll award some of these points for improvement if your PA02 was not awarded full credit.].
 If you cannot pass every test by the deadline,
 add a description of what your code cannot do to the `README`.
 
