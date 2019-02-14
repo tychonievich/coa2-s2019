@@ -21,7 +21,7 @@ Your code should pass every test they have^[We recognize this will be harder for
 If you cannot pass every test by the deadline,
 add a description of what your code cannot do to the `README`.
 
-Note if you submitted a file you don't want, there is currently no way to remove it. However, you can upload an empty file with the same name to remove it from what happens.
+Note that if you submitted a file you don't want, there is currently no way to remove it. However, you can upload an empty file with the same name to remove it from what happens.
 
 ## Prepare for code review
 

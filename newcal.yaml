@@ -44,7 +44,8 @@ lectures:
     - IP
     - [UDP, TCP, ports]
     - [DNS, DHCP]
-    - [spoofing, snooping]
+    - TLS
+    - review Q&A
     - TLS
     - caches
     - caches
