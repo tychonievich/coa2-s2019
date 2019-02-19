@@ -171,6 +171,11 @@ assignments:
     Exam1:
         due: 2019-02-18 14:50:00
         files: [responses.txt]
+        link: exam1.html
+    Exam1 Wrapper:
+        due: 2019-03-01 14:00:00
+        files: [exam1wrap.txt]
+        link: exam1.html
     Exam2:
         due: 2019-04-01 14:50:00
     Exam3:
