@@ -170,6 +170,7 @@ assignments:
         
     Exam1:
         due: 2019-02-18 14:50:00
+        files: 'responses.txt'
     Exam2:
         due: 2019-04-01 14:50:00
     Exam3:
