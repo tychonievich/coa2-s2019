@@ -132,6 +132,22 @@ assignments:
         due: 2019-02-13 14:30:00
         files: ["*.c", "*.h", Makefile]
         rubric: {"kind":"percentage"}
+        rublic:
+            kind: hybrid
+            auto-weight: 0
+            auto-late-days: 2
+            late-penalty: 1
+            human:
+                - Makefile build .o files
+                - .c files follow .h types
+                - '.c files use #defines, not hard-coding'
+                - invoke posix_memalign with good sizes
+                - get page offset from VA correctly
+                - get VPNs from VA correctly
+                - restore page offset to translated values correctly
+                - use VPNs as indices into page tables correctly
+                - handles the valid bit properly
+                - many test cases pass
     
     PA03:
         title: 'page tables part 2'
