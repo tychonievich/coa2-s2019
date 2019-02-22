@@ -153,7 +153,7 @@ assignments:
     PA03:
         title: 'page tables part 2'
         link: pa03-pagetable2.html
-        due: 2019-02-22 14:00:00
+        due: 2019-03-01 14:00:00
         open: 2019-02-13 14:00:00
         files: ["*.c", "*.h", Makefile, README, LICENSE, ACKNOWLEDGEMENTS, "licenses.txt", '*']
 
