@@ -47,7 +47,7 @@ They should have the following properties:
 
 - $e(m, k) = c \ne m$ -- that is, encryption results in a **ciphertext** which is unlike the original message
 - $d(e(m, k), k) = m$ -- that is, decryption undoes encryption
-- recovering $m$ from a known $e$ and $c$ is no easier than trying every possible $k$ until one works
+- recovering $m$ from $e$ and $c$ without $k$ is no easier than trying every possible $k$ until one works
 
 {.example ...} The following code implements a symmetric cipher, albeit not a secure one
 
@@ -62,14 +62,14 @@ void d(uint *arr, size_t len, size_t key) {
 }
 ```
 
-Describing why this is insecure is a bit tricky, but it largely stems from the fact that messages have internal patterns. If I know that you are sending a PDF document, for example, I know that the first four bytes are always 0x25, 0x50, 0x44, 0x46; I can simply subtract that from the first four bytes of the ciphertext and recover the key.
+Describing why this is insecure stems from the fact that messages have internal patterns. If I know that you are sending a PDF document, for example, I know that the first four bytes are always 0x25, 0x50, 0x44, 0x46; I can simply subtract that from the first four bytes of the ciphertext and recover the key.
 {/}
 
-Getting the first two properties is easy; getting the third is hard, and as with hashes we have a history of compromising one cipher and picking another to replace it.
+Getting the first two properties is easy; getting the third is hard, contributing to a history of finding a weakness in one cipher and picking another to replace it.
 
 ## Asymmetric ciphers
 
-An **asymmetric cipher** or **public-key cipher**^[Note that "public-key" is an overloaded term; [Diffie-Hellman] does not use an asymmetric cipher, but is also somtimes called a "public-key" protocol.] is a function that can both encrypt and decrypt.
+An **asymmetric cipher** or **public-key cipher**^[Note that "public-key" is an overloaded term; for example, [Diffie-Hellman] does not use the type of asymmetric cipher described here, but is asymmetric in a different way and is also sometimes called a "public-key" protocol.] is a function that can both encrypt and decrypt.
 However, keys come in pairs. If $f$ is an asymmetric cipher and $(k_1, k_2)$ is a key pair then
 
 - $f(f(m, k_1), k_2) = m$ -- $k_2$ decrypts what $k_1$ encrypts
@@ -121,7 +121,7 @@ and to decrypt messages only I can encrypt.
 
 Unlike [symmetric ciphers], of which there are many,
 only a few asymmetric ciphers have ever been popular.
-RSA is the most common by far,
+RSA^[RSA is short for Rivest-Shamir-Adleman, named after Ron Rivest, Adi Shamir, and Len Adleman, its inventors. It was previously invented by Clifford Cocks, but Cocks' document describing it was given a top-secret classification by the British government and not made public until 1997.]  is the most common by far,
 so much so that "RSA" is sometimes used as a generic noun for all asymmetric ciphers.
 
 ## Diffie-Hellman
@@ -131,7 +131,7 @@ The **Diffie-Hellman key exchange**^[There is some difference of opinion about t
 The process requires identifying a "cyclic group" -- that is, a set of values (integers are preferred) and an operator on elements of that set such that $op(op(x, y), z) = op((x, z), y)$.
 To be secure, the set should be large and the operation hard to undo (i.e., knowing both $x$ and $op(x,y)$ should not make it easy to determine $y$).
 
-{.example ...} The following code implements a cyclic group, albeit not a secure one
+{.example ...} The following code implements a cyclic group (i.e., `f(f(x,y),z) == f(f(x,z),y)`{.c}, albeit not a secure one
 
 ```c
 int f(int generator, int key) {
@@ -257,7 +257,7 @@ Task
 Solution
 :   Store only a [hash](#hashes) of the password.
     
-    Note that a simple implementation of this makes possible exploits like *rainbow tables* where the hashes of a large number of plausible passwords are precomputed to compare against the hashes stored on a computer.
+    Note that a simple implementation of this makes possible exploits like [rainbow tables](https://en.wikipedia.org/wiki/Rainbow_table) where the hashes of a large number of plausible passwords are precomputed to compare against the hashes stored on a computer.
     One partial solution to this is to *salt* the password before hashing:
     we generate a random value, store it with the password, and include it and the password in the hash.
 
