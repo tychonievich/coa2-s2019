@@ -40,6 +40,11 @@ Write the following files:
         
         where `(number)` is the argument integer
         and `(bigger number)` is the result of invoking `nextprime` on the argument
+        
+        Do not include the parentheses in your actual output; correct formatting is
+            
+            3 is prime
+            4 is not prime, but 5 is
 
 `primes.h`
 :   contains the header for `pprime`, `isprime`, and `nextprime`.
@@ -53,6 +58,8 @@ will rebuild (if necessary) `primes.o` and `main.o` and link them together into 
 See `info make` for detailed converation about how `make` works;
 <https://www.gnu.org/software/make/manual/make.html> for online documentation;
 and <https://www.gnu.org/software/make/manual/make.html#Rule-Example> for an example to work from.
+
+If your code uses any function in `math.h` (such as `sqrt`, `pow`, `log`, etc.), make sure you add `-lm` to the `LDFLAGS` of your `Makefile` or it will not compile on the department servers.
 
 # Collaboration
 
