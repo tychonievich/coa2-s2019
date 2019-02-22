@@ -32,7 +32,7 @@ that lets a forgotten detail be recovered with only partial work.
 
 Note that in this example, it is important to store more than just the word that is read;
 you also have to remember the address (book, page, and word) at which it was found.
-In caching terminology, that "what we looked up" data
+In caching terminology, that "where we found it" data
 is known as the **tag**;
 the thing being remembered is the **block**;
 and the tag + block pair is known as a **cache line**.
@@ -43,9 +43,10 @@ Locality is a pseudo-technical term in computing
 with two subtypes:
 
 Spatial locality
-:   Refers to both (a) having only a small difference in numerical address
-    and (b) programs where most addresses accessed
-    are spatially local to the address accessed before them.
+:   Refers to two related ideas:
+    
+    a. having only a small difference in numerical address
+    b. programs where most addresses accessed are spatially local to the address accessed before them.
 
 Temporal locality
 :   Refers to the accesses to a single address
@@ -53,8 +54,8 @@ Temporal locality
 
 Most programs, even if not specifically designed to do so,
 exhibit both spatial and temporal locality.
-It is primarily the temporal locality that makes caching useful,
-but caches can be designed to benefit from spatial locality as well.
+Caches are designed to increase memory access speeds
+when either form of locality is present.
 
 ## Cache line
 
@@ -63,13 +64,12 @@ but also the memory nearby, on the assumption (based on spatial locality)
 that if one address is accessed nearby addresses will soon be accessed as well.
 
 The most common way to do this is that when address `x` is accessed,
-all addresses with the same high-order bits are loaded into the cache,
-thus making a larger *block*.
-The *tag* is thus not the full address,
-just the higher-order bits.
+all addresses with the same high-order bits are loaded into the cache;
+the data thus fetched is called a *block*.
+The *tag* of a block is not the full address, just the higher-order bits that all bytes in the block share.
 
 {.example ...}
-Suppose a cache is designed with 32-byte blocks.
+Suppose a cache is designed with 64-byte blocks.
 When accessing address `0x12345678`,
 all bytes with addresses between `0x12345640`
 and `0x1234567F`
@@ -78,9 +78,25 @@ are loaded into the block
 and the tag is `0x48d159` (i.e., `0x12345678 >> 6`{.c})
 {/}
 
-The low-order of the original address indicate where, within the block,
+The low-order bits of the original address indicate where
 the addressed information is stored within the block
 and is known as the **block offset** or simply the offset.
+
+{.aside ...} Comparison to Virtual Memory
+
+There are several parallels between a cache line and a virtual memory page.
+The common use of low-order bits as an offset into a contiguous chunk of memory is one such parallel;
+we'll see later that most caches also break the high-order bits into something used to locate a line and something not so used,
+like virtual memory's virtual page numbers and unused bits.
+
+Virtual memory uses these tools to *translate* an address;
+if there is no translation, there is no data at that address and a fault occurs.
+Caching uses it to *accelerate* an access;
+if the cache doesn't find it, RAM will, and there is no true failure possible.
+
+Virtual memory provides new capability to a system via the cooperation of the hardware and OS.
+Caching is managed entirely by the hardware and is only designed to increase speed, not add features.
+{/}
 
 # Three types of caches
 
@@ -91,13 +107,13 @@ it is generally safe to assume that what is being cached is memory accesses,
 but most of the concepts of caching are independent of that detail.
 
 There are several designs of a cache,
-varying based on how they decide what old cache entry is forgotten
-to make room for a new cache entry.
+varying based on how they decide which old cache line is forgotten
+to make room for a new cache line.
 
 ## Fully-associative
 
 A **fully-associative cache** stores a set of cache lines.
-Because it is a set, there is maximal ability to pick and choose
+Using an unordered set instead of an array gives maximal ability to pick and choose
 which line is removed to make room for the next line;
 but that freedom comes at a cost.
 
@@ -119,9 +135,8 @@ such as the **cold miss** when the address is accessed for the very first time.
 Other misses are caused by the specific design of the cache.
 
 A fully-associative cache can suffer from a **capacity miss**.
-A capacity miss occurs when an $n$-line cache
-has accessed $n$ or more distinct lines
-since it last accessed the line being requested.
+A capacity miss occurs when every line in the cache has been replaced
+since the last access to the line being requested.
 
 ## Direct-mapped
 
@@ -163,7 +178,7 @@ A direct-mapped cache can suffer from a **conflict miss**
 A conflict miss occurs when a different line has been loaded into the same index
 since a requested line was last accessed.
 While conflict misses are more likely when a cache is small than when it is large,
-in a direct mapped cache of any size a conflict miss can occur with as few as two memory accesses.
+in a direct mapped cache of any size a conflict miss can occur with as few as three memory accesses.
 
 {.example ...}
 Suppose a direct-mapped cache has 16-byte blocks
@@ -190,16 +205,23 @@ is a compromise
 between the flexibility at cost of a fully-associative cache
 and the scale and efficiency of a direct-mapped cache.
 Structurally, it is an array of sets of lines.
-Set associative caches are far and away the most common type in hardware.
+Set associative caches dominate hardware,
+and if a cache with more than a few dozen lines is mentioned without specifying type
+it is generally safe to assume it is set-associative.
 
 Addresses are processed by set-associative caches
 exactly the same way they are for direct-mapped caches:
-a tag, index, and block offset.
-The index, however, instead of identifying a single like
+a tag, index, and block offset (see [Fig 1](#fig1)).
+The index, however, instead of identifying a single line
 identifies an entire set of lines.
 As such, it is traditionally called a **set index** instead of simply an index.
 The size of the sets are referred to using the term
 "$n$-way set-associative cache" meaning each set contains $n$ lines.
+
+Neither capacity nor conflict misses are a perfect match for a set-associative cache,
+though the terms are sometimes used loosely to distinguish between
+misses that could have been avoided with a different cache design (conflict)
+and misses that could only have been avoided by having a larger cache (capacity).
 
 # Common memory caches
 
@@ -216,10 +238,13 @@ L1
 TLB
 :   The TLB tends to be a small set-associative cache with fairly large sets
     that holds a single [page table entry](kernel.html#page-tables) per block.
+    TLBs only hold the final PTE encountered in translating an address,
+    the one that has the PPN of the final memory page.
     
     The TLB is often a read-only cache.
-    If the page table is modified, the TLB may need to be partly or fully flushed,
-    marking its entries as invalid and requiring full page table lookups to get its contents refreshed.
+    If the page table is modified, the TLB may need to be partly or fully **flushed**:
+    that is, (some of) its entries are marked as invalid,
+    requiring full page table lookups upon next access.
 
 L2--L*n*
 :   The L2 cache is larger than the L1
@@ -259,5 +284,13 @@ As guiding principles, code is more cache-efficient if
 - It performs all accesses to one region of memory at the same time
 - It uses memory efficiently
 - Addresses are aligned so no single access spans cache lines
-- When multiple different regions of memory are being accessed, differ in set index, not just tag
+- When multiple different regions of memory are being accessed, they differ in set index not just tag
 
+Writing cache efficient code is a fairly involved topic,
+well beyond the scope of this course.
+It often involves counter-intuitive decisions such as adding more loops to code
+and using data structures with worse asymptotic behavior but better cache locality.
+A common trend is these make code harder for humans to read, understand, and adjust,
+so they should generally be used only when the speed increases they provide are actually needed.
+If you end up  writing high-performance code at some point,
+these will be techniques to learn.
