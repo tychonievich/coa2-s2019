@@ -157,6 +157,12 @@ assignments:
         open: 2019-02-13 14:00:00
         files: ["*.c", "*.h", Makefile, README, LICENSE, ACKNOWLEDGEMENTS, "licenses.txt", '*']
 
+    PA04:
+        title: 'TLB'
+        link: pa04-tlb.html
+        open: 2019-03-01 14:00:00
+        due: 2019-03-15 14:00:00
+        files: ["*.c", "*.h", Makefile, '*']
 
     Quiz01:
         due: 2019-01-23 12:00:00
