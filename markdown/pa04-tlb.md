@@ -8,7 +8,7 @@ you'll merely use its API, as defined in `mlpt.h`
 
 # Task
 
-Implement a 4-way set-associative 16-set translation lookaside buffer with a single VPN → PA mapping per block.
+Implement a 4-way set-associative 16-set translation lookaside buffer with a single VPN → PA mapping per block^[You may hard-code 4 and 16 in your implementation, though a design that has these in `#define`s may actually help you keep your code organized.].
 In addition to its block, each cache line should also store
 
 - a valid bit
