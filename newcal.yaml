@@ -49,12 +49,12 @@ lectures:
     - review Q&A
     - TLS
     - caches
-    - caches
+    - [caches, no class meeting]
 
 
+    - [concurrency, no class meeting]
     - concurrency
-    - parallelism
-    - race conditions
+    - concurrency
     - atomic ops
     - semaphores
     - monitors
