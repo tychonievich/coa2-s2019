@@ -56,8 +56,8 @@ lectures:
     - concurrency
     - synchronization
     - synchronization
-    - `pthreads`
-    - `pthreads`
+    - "`pthreads`"
+    - "`pthreads`"
     - roll back
     - deadlock
     - deadlock
