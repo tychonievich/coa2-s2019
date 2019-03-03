@@ -54,10 +54,10 @@ lectures:
 
     - [concurrency, no class meeting]
     - concurrency
-    - concurrency
-    - atomic ops
-    - semaphores
-    - monitors
+    - synchronization
+    - synchronization
+    - `pthreads`
+    - `pthreads`
     - roll back
     - deadlock
     - deadlock
@@ -101,7 +101,8 @@ reading:
     DNS: '[protocols §3](protocols.html#urls)'
     DHCP: '[wikipedia](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol)'
     spoofing: '[wikipedia](https://en.wikipedia.org/wiki/IP_address_spoofing)'
-    TLS: ['[security](sec.html)']
+    TLS: '[security](sec.html)'
+    synchronization: '[sync](sync.html)'
 
 assignments:
     ".groups":
