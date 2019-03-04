@@ -73,22 +73,6 @@ If `POBITS` is 12 and `tlb_translate` is invoke with addresses `0x12345`, `0x124
 - `tlb_translate(0x13579)` should not invoke `translate(0x13000)`
 {/}
 
-# Example run
-
-Assuming `LEVELS` is 4 and `POBITS` is 16,
-the following code should run without assertion violations,
-assuming all variables have been defined and all used addresses have earlier by `allocate`ed using [PA03](pa03-pagetable2.html) code.
-
-```c
-page_allocate(0x123456);
-page_allocate(0x1468AC);
-
-tlb_clear();
-assert(tlb_peek(0x1234567) == 0);
-x = tlb_
-assert(tlb_peek(0x1234567) == 0);
-```
-
 # Tips
 
 You can test this code without a working implementation of multi-level page tables,
