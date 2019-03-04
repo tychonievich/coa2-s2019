@@ -42,11 +42,6 @@ int tlb_peek(size_t va);
  *
  * As an exception, if translate(va) returns -1, do not
  * update the TLB: just return -1.
- *
- * To keep the two-entries-per-block, when tlb_translate
- * invokes translate(x), it also invokes `translate(x^1)`
- * and caches that result as well, even if that second
- * entry is -1.
  */
 size_t tlb_translate(size_t va);
 ```
