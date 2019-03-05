@@ -73,6 +73,7 @@ If `POBITS` is 12 and `tlb_translate` is invoke with addresses `0x12345`, `0x124
 - `tlb_translate(0x13579)` should not invoke `translate(0x13000)`
 {/}
 
+
 # Tips
 
 You can test this code without a working implementation of multi-level page tables,
@@ -88,3 +89,46 @@ size_t translate(va) { return va; }
 gives enough behavior to test most TLB behaviors; adding some logging code to the stub can help make sure that `translate` is only called as needed.
 
 TLBs typically do not have a CPU-write-to-TLB functionality, so they do not need to be write-through or write-back.
+
+# Examples
+
+If you stub `translate(va)`{.c} as `return va < 0x1234000 ? va + 0x20000 : -1;`{.c}
+then the following code should work
+
+````c
+tlb_clear();
+assert(tlb_peek(0) == 0);
+assert(tlb_translate(0) == 0x20000);
+assert(tlb_peek(0) == 1);
+assert(tlb_translate(0x200) == 0x20200);
+assert(tlb_peek(0) == 1);
+assert(tlb_peek(0x200) == 1);
+assert(tlb_translate(0x1200) == 0x21200);
+assert(tlb_translate(0x5200) == 0x25200);
+assert(tlb_translate(0x8200) == 0x28200);
+assert(tlb_translate(0x2200) == 0x22200);
+assert(tlb_peek(0x1000) == 1);
+assert(tlb_peek(0x5000) == 1);
+assert(tlb_peek(0x8000) == 1);
+assert(tlb_peek(0x2000) == 1);
+assert(tlb_peek(0x0000) == 1);
+assert(tlb_translate(0x101200) == 0x121200);
+assert(tlb_translate(0x801200) == 0x821200);
+assert(tlb_translate(0x301200) == 0x321200);
+assert(tlb_translate(0x501200) == 0x521200);
+assert(tlb_translate(0xA01200) == 0xA21200);
+assert(tlb_translate(0xA0001200) == -1);
+assert(tlb_peek(0x001200) == 0);
+assert(tlb_peek(0x101200) == 0);
+assert(tlb_peek(0x301200) == 3);
+assert(tlb_peek(0x501200) == 2);
+assert(tlb_peek(0x801200) == 4);
+assert(tlb_peek(0xA01200) == 1);
+assert(tlb_translate(0x301800) == 0x321800);
+assert(tlb_peek(0x001000) == 0);
+assert(tlb_peek(0x101000) == 0);
+assert(tlb_peek(0x301000) == 1);
+assert(tlb_peek(0x501000) == 3);
+assert(tlb_peek(0x801000) == 4);
+assert(tlb_peek(0xA01000) == 2);
+````
