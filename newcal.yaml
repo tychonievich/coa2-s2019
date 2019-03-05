@@ -64,6 +64,7 @@ lectures:
     - deadlock
     - consistency models
     - concurrency bugs
+    - concurrency bugs
     - all bugs exploitable
     - reporting exploits
 
