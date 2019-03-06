@@ -104,6 +104,7 @@ reading:
     spoofing: '[wikipedia](https://en.wikipedia.org/wiki/IP_address_spoofing)'
     TLS: '[security](sec.html)'
     synchronization: '[sync](sync.html)'
+    concurrency: '[thread and process](thread.html)'
 
 assignments:
     ".groups":
@@ -163,9 +164,31 @@ assignments:
         title: 'TLB'
         link: pa04-tlb.html
         open: 2019-03-01 14:00:00
-        due: 2019-03-15 14:00:00
+        due: 2019-03-22 14:00:00
         files: ["*.c", "*.h", Makefile, '*']
 
+    PA05:
+        title: 'DP'
+        open: 2019-03-22 14:00:00
+        due: 2019-03-29 14:00:00
+        
+    PA06:
+        title: 'Fork'
+        open: 2019-03-29 14:00:00
+        due: 2019-04-05 14:00:00
+
+    PA07:
+        title: 'Life'
+        open: 2019-03-05 14:00:00
+        due: 2019-04-19 14:00:00
+        
+    PA08:
+        title: 'Pipeline'
+        open: 2019-03-19 14:00:00
+        due: 2019-04-26 14:00:00
+        
+        
+        
     Quiz01:
         due: 2019-01-23 12:00:00
     Quiz02:
