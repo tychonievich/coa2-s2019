@@ -104,7 +104,8 @@ reading:
     spoofing: '[wikipedia](https://en.wikipedia.org/wiki/IP_address_spoofing)'
     TLS: '[security](sec.html)'
     synchronization: '[sync](sync.html)'
-    concurrency: '[thread and process](thread.html)'
+    concurrency: '[thread and process §1--2](thread.html)'
+    "`pthreads`": '[thread and process §3](thread.html#using-pthreads)'
 
 assignments:
     ".groups":
