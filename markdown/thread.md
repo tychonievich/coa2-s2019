@@ -121,7 +121,36 @@ This is called a "fork bomb" and is a common rookie mistake that results in free
 
 ## Replacing memory
 
-(this section will cover the `exec` family of functions; to get a head start, see `man execl`{.bash} until I get it written).
+Because copy-on-write makes `fork` an efficient and simple way to make new processes, the usual pattern for launching a new program begins is
+
+1. The launcher `fork`s.
+2. The child process changes its memory to the new code using `execve` or its relatives.
+
+The `execve` program is defined as follows:
+
+```c
+#include <unistd.h>
+
+int execve(const char *filename, char *const argv[], char *const envp[]);
+```
+
+`filename`
+:   The path of a binary executable.
+
+`argv`
+:   An array of argument strings passed to the new program.
+    By convention, the first of  these  strings (i.e., `argv[0]`) should contain the filename associated with the file being executed.
+
+    The `argv` array must include a `NULL` pointer to mark the end of the array.
+
+`envp`
+:   An array of strings, conventionally of the form `key=value`,
+    which are passed as environment^[We have not spent much time on environments, but every program has access to global array of strings `extern char **environ`{.c} which is used to communicate such things as what directories should be searched for executable and where windows should be opened. See `man 7 environ`{.bash} for more.] to the new program.
+    
+    The `envp` array must include a `NULL` pointer to mark the end of the array.
+
+Assuming there are no errors in the arguments, `execve` does not return;
+instead, it overwrites all of user-space memory with the memory contents described in the binary executable file and jumps to the initial instruction of the newly-loaded code.
 
 ## Using `waitpid`
 
