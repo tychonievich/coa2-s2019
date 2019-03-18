@@ -105,7 +105,7 @@ reading:
     TLS: '[security](sec.html)'
     synchronization: '[sync](sync.html)'
     concurrency: '[thread and process §1--2](thread.html)'
-    "`pthreads`": '[thread and process §3](thread.html#using-pthreads)'
+    "`pthreads`": '[pthreads §3](pthreads.html)'
 
 assignments:
     ".groups":

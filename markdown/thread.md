@@ -211,4 +211,10 @@ The `status` integer also has other information, such as if it was terminated wi
 
 # Using `pthreads`
 
-(this section will be written over spring break).
+The POSIX standard defined a set of interfaces for handling threads,
+which are implemented as a native threading mechanism on Linux and OS X
+and as an optional mechanism on Windows.
+POSIX threads, often abbreviated pthreads,
+are complicated enough to deserve [their own writeup](pthreads.html)
+The POSIX Thread Library (often PThreads) 
+
