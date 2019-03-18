@@ -272,30 +272,9 @@ but not both at once.
 
 The relevant functions are documented in the following manual pages:
 
-- `pthread_rwlock_init` -- this is complicated because they have multiple attributes to handle how they handle if a writer is waiting for the readers to finish and a new reader arrives..
+- `pthread_rwlock_init` -- this is complicated because they have multiple attributes to handle how they handle if a writer is waiting for the readers to finish and a new reader arrives.
 - `pthread_rwlock_rdlock` and `pthread_rwlock_wrlock` -- acquire the lock in two different ways.
 - `pthread_rwlock_timedrdlock` and `pthread_rwlock_timedwrlock` -- try to acquire the lock, but if a specified time passes without success return an error code instead.
 - `pthread_rwlock_unlock` -- release the lock (no matter how it was acquired).
 
-
-```c
-pthread_mutex_t mutex;
-
-void *thread_function(void *) {
-    /* ... */
-    pthread_mutex_lock(&mutex);
-    /* only one thread can get here at a time */
-    pthread_mutex_unlock(&mutex);
-    /* ... */
-}
-
-int main(int argc, const char *argv[]) {
-    /* ... */
-    pthread_mutex_init(&mutex, NULL);
-    for(int i=0; i<THREADCOUNT; i+=1) {
-        /* ... */
-        pthread_create(&id[i], NULL, thread_function, &arg[i]);
-    }
-    /* ... */
-}
-```
+However, these details aside the overall usage looks similar to how [mutexes](#mutex) are used with pthreads.
