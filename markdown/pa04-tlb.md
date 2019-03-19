@@ -18,6 +18,8 @@ You should design your own data structures, etc, to make this work properly.
 
 The public API should be the following `tlb.h`
 
+> Note: there was an inconsistency between the comment and the spec, fixed 2019-03-19 08:38 EDT. `tlb_peek` should return 1 for **most**, not **least**, recently used. If you had a working solution with the old definition, adding `return 5-previous_return` should update to the new version.
+
 ```c
 #include <config.h> /* see PA02 for guidance on this file */
 #include <mlpt.h>   /* see PA02 this file */
@@ -28,7 +30,7 @@ void tlb_clear();
 /**
  * return 0 if this virtual address does not have a valid
  * mapping in the TLB. Otherwise, return its LRU status: 1
- * if it is the least-recently used, 2 if the next-to-least,
+ * if it is the most-recently used, 2 if the next-to-most,
  * etc.
  */
 int tlb_peek(size_t va);
