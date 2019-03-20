@@ -170,8 +170,10 @@ assignments:
 
     PA05:
         title: 'DP'
+        link: pa05-dp.html
         open: 2019-03-22 14:00:00
         due: 2019-03-29 14:00:00
+        files: ["dp_arbitrator.c", "dp_hierarchy.c", "dp_message.c"]
         
     PA06:
         title: 'Fork'
