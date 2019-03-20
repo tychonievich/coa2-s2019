@@ -72,7 +72,7 @@ If `POBITS` is 12 and `tlb_translate` is invoke with addresses `0x12345`, `0x124
 
 - `tlb_translate(0x12345)` should invoke `translate(0x12000)`,
 - `tlb_translate(0x12468)` should not invoke `translate` at all (it's a cache hit), and
-- `tlb_translate(0x13579)` should not invoke `translate(0x13000)`
+- `tlb_translate(0x13579)` should invoke `translate(0x13000)`
 {/}
 
 
