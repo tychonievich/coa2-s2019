@@ -176,8 +176,8 @@ assignments:
                 - in-code documentation
                 
                 - makes mlpt.a
-                - readme: config.h
-                - readme: example use case
+                - readme - config.h
+                - readme - example use case
                 - license
                 - acknowledgements
                 
