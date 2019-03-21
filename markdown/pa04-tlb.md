@@ -40,7 +40,7 @@ int tlb_peek(size_t va);
  * corresponding physical address. If not, use
  * `translate(va)` to find that address, store the result
  * in the TLB, and return it. In either case, make its
- * cache line the least-recently used in its set.
+ * cache line the most-recently used in its set.
  *
  * As an exception, if translate(va) returns -1, do not
  * update the TLB: just return -1.
