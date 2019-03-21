@@ -182,6 +182,8 @@ assignments:
                 - acknowledgements
                 
                 - licenses.txt
+                
+                - de-allocate - implemented or described why not
 
     PA04:
         title: 'TLB'
