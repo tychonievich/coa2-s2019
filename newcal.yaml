@@ -160,6 +160,28 @@ assignments:
         due: 2019-03-01 14:00:00
         open: 2019-02-13 14:00:00
         files: ["*.c", "*.h", Makefile, README, LICENSE, ACKNOWLEDGEMENTS, "licenses.txt", '*']
+        rubric: 
+            kind: hybrid
+            auto-weight: 0
+            auto-late-days: 0
+            late-penalty: 1
+            human:
+                - passed most tests
+                - passed all tests
+                
+                - no warnings
+                - good style
+                - meaningful variable names
+                - reasonable organization
+                - in-code documentation
+                
+                - makes mlpt.a
+                - readme: config.h
+                - readme: example use case
+                - license
+                - acknowledgements
+                
+                - licenses.txt
 
     PA04:
         title: 'TLB'
