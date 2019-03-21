@@ -21,8 +21,8 @@ The public API should be the following `tlb.h`
 > Note: there was an inconsistency between the comment and the spec, fixed 2019-03-19 08:38 EDT. `tlb_peek` should return 1 for **most**, not **least**, recently used. If you had a working solution with the old definition, adding `return 5-previous_return` should update to the new version.
 
 ```c
-#include <config.h> /* see PA02 for guidance on this file */
-#include <mlpt.h>   /* see PA02 this file */
+#include "config.h" /* see PA02 for guidance on this file */
+#include "mlpt.h"   /* see PA02 this file */
 
 /** invalidate all cache lines in the TLB */
 void tlb_clear();
