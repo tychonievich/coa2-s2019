@@ -8,7 +8,7 @@ When you make a comment in a conversation, it is (usually) treated as an [atomic
 
 Study rooms, lavatory stalls, TV remotes, and many other resources are handled as if protected by a [mutex](#mutex): anyone can use them, but by using them you ar excluding others from using them at the same time. [Semaphores](#Semaphore) and [monitors](#monitor) have some special properties, but are roughly variations on the [mutex](#mutex) theme.
 
-One person walking along a sidewalk does not prevent others from entering it as well, but one construction team repairing the sidewalk does because maintenance staff tend to use a [reader-writer lock] to access sidewalks and many other parts of our lived environment: they may either be used by a single repair team (a "writer") or any number of pedestrians ("readers") but not both at the same time.
+One person walking along a sidewalk does not prevent others from entering it as well, but one construction team repairing the sidewalk does because maintenance staff tend to use a [reader-writer lock](#reader-writer-lock) to access sidewalks and many other parts of our lived environment: they may either be used by a single repair team (a "writer") or any number of pedestrians ("readers") but not both at the same time.
 
 If you've ever told a group a friends "we'll meet up by the statue and then go out from there" you've implemented a [barrier](#barrier): everyone arriving at the statue waits there until everyone arrives, and then all move forward together from there.
 
@@ -59,7 +59,7 @@ A **mutex** (from "mutual exclusion") or **lock** is any device that ensures one
 Mutexes can be implemented as a binary [semaphore](#semaphore), provided that an additional limitation is imposed where only the thread that has acquired and not yet released the semaphore releases it.
 More commonly, mutexes are built as more complicated constructs to provide extra features, including enforcing the "only the acquirer can release" property, automatic release if the acquirer terminates without releasing, etc.
 
-Operations on mutexes use similar vocabulary to the corresponding operations on [semaphores].
+Operations on mutexes use similar vocabulary to the corresponding operations on [semaphores](#semaphore).
 
 # Condition Variable
 
