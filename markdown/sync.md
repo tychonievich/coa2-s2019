@@ -1,5 +1,5 @@
 ---
-title: Synchronization primitives]
+title: Synchronization primitives
 ...
 
 # Day-to-day life
