@@ -4,15 +4,15 @@ title: Synchronization primitives]
 
 # Day-to-day life
 
-When you make a comment in a conversation, it is (usually) treated as an [atomic operation]: you can divide the conversation into what happened before and what happened after your comment, but during it nothing else occurred. This is not true in most text-based chats, though, where it is common for multiple comments to be created concurrently.
+When you make a comment in a conversation, it is (usually) treated as an [atomic operation](#atomic-operation): you can divide the conversation into what happened before and what happened after your comment, but during it nothing else occurred. This is not true in most text-based chats, though, where it is common for multiple comments to be created concurrently.
 
-Study rooms, lavatory stalls, TV remotes, and many other resources are handled as if protected by a [mutex]: anyone can use them, but by using them you ar excluding others from using them at the same time. [Semaphores] and [monitors] have some special properties, but are roughly variations on the [mutex] theme.
+Study rooms, lavatory stalls, TV remotes, and many other resources are handled as if protected by a [mutex](#mutex): anyone can use them, but by using them you ar excluding others from using them at the same time. [Semaphores](#Semaphore) and [monitors](#monitor) have some special properties, but are roughly variations on the [mutex](#mutex) theme.
 
 One person walking along a sidewalk does not prevent others from entering it as well, but one construction team repairing the sidewalk does because maintenance staff tend to use a [reader-writer lock] to access sidewalks and many other parts of our lived environment: they may either be used by a single repair team (a "writer") or any number of pedestrians ("readers") but not both at the same time.
 
-If you've ever told a group a friends "we'll meet up by the statue and then go out from there" you've implemented a [barrier]: everyone arriving at the statue waits there until everyone arrives, and then all move forward together from there.
+If you've ever told a group a friends "we'll meet up by the statue and then go out from there" you've implemented a [barrier](#barrier): everyone arriving at the statue waits there until everyone arrives, and then all move forward together from there.
 
-When you go to a store, a purchase only occurs if both you give them money and they give you the product. If either step fails, neither step occurs. This is an example of a [transaction]: multiple steps, between which other things can occur, but guaranteed to either all happen or none happen.
+When you go to a store, a purchase only occurs if both you give them money and they give you the product. If either step fails, neither step occurs. This is an example of a [transaction](#transaction): multiple steps, between which other things can occur, but guaranteed to either all happen or none happen.
 
 # Atomic Operation
 
@@ -56,7 +56,7 @@ Although I described counting semaphores as a count of how many resources are av
 
 A **mutex** (from "mutual exclusion") or **lock** is any device that ensures one and only one thread or process has access to some resource at a time.
 
-Mutexes can be implemented as a binary [semaphore], provided that an additional limitation is imposed where only the thread that has acquired and not yet released the semaphore releases it.
+Mutexes can be implemented as a binary [semaphore](#semaphore), provided that an additional limitation is imposed where only the thread that has acquired and not yet released the semaphore releases it.
 More commonly, mutexes are built as more complicated constructs to provide extra features, including enforcing the "only the acquirer can release" property, automatic release if the acquirer terminates without releasing, etc.
 
 Operations on mutexes use similar vocabulary to the corresponding operations on [semaphores].
@@ -70,20 +70,20 @@ Instead, it is composed of at least two fairly complicated constructs:
     
     Some implementations no not actually store the assertion in any way,
     instead assuming that it is handled elsewhere in the code
-    and that the associated [monitor] will invoke *wait* only if it was false
+    and that the associated [monitor](#monitor) will invoke *wait* only if it was false
     and *signal* any time it becomes true.
 
 - A **wait-queue**; that is, a collection (not necessarily a queue) of suspended threads awaiting the moment when the assertion will become true.
 
 - Optionally, a **ready queue**; that is, a collection (not necessarily a queue) of suspended threads where the assertion is true and the thread is ready to run, but has not yet been scheduled to do so.
 
-Condition variables are almost always discussed coupled with a [mutex], the pair forming a [monitor].
+Condition variables are almost always discussed coupled with a [mutex](#mutex), the pair forming a [monitor](#monitor).
 Because condition variables are so often used in monitors, I have sometimes seen a monitor called a "condition variable" colloquially.
 
 
 # Monitor
 
-A **monitor** is a paired [mutex] and [condition variable] with the following operations defined upon the pair:
+A **monitor** is a paired [mutex](#mutex) and [condition variable](#condition-variable) with the following operations defined upon the pair:
 
 wait
 :   Used to wait until the condition variable's assertion becomes true.
@@ -109,7 +109,7 @@ Monitors are sometimes implemented at a programming language level as the most u
 # Reader-writer lock
 
 A reader-writer lock is used in two modes.
-If used by a writer, it is a [mutex];
+If used by a writer, it is a [mutex](#mutex);
 if used by a reader, it is not.
 In particular, is has the following four operations
 
@@ -128,7 +128,7 @@ End write
 :   Set the number of writers to 0.
 
 There are implementations of this using multiple [mutexes](#mutex)
-or a [monitor], both augmented with a few extra variables.
+or a [monitor](#monitor), both augmented with a few extra variables.
 Several designs exist in part because of the multiple possible answers to the following question:
 
 - If a writer is waiting for all the readers to be done, and a new reader arrives, should that reader be allowed in or made to wait for the writer to finish first?
@@ -157,7 +157,7 @@ and that all waiting processes pass the barrier before others arrive.
 # Transaction
 
 A **transaction**, or more formally an **atomic transaction**,
-is a group of operations that are guaranteed to occur as if they were a single [atomic operation].
+is a group of operations that are guaranteed to occur as if they were a single [atomic operation](#atomic-operation).
 Appropriate use of [mutexes](#mutex) [monitors](#monitor) can be used to implement transactions,
 but often when transactions are identified by name
 they are instead implemented "optimistically" using something liek the read-copy-update mechanism.
