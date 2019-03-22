@@ -6,7 +6,7 @@ In this class, you will generally submit multiple files for each assignment
 with an accompanying makefile to help us run them.
 Makefiles are quite powerful and, while sometimes considered antiquated compared to tools like [cmake](https://cmake.org), [gradle](https://gradle.org), and [scons](https://scons.org),
 it remains the dominant build automation tool in the GNU and Linux ecosystems.
-You're welcome to [read a lot more](https://www.gnu.org/software/make/manual/)
+You're welcome to [read a little more](https://uva-cs.github.io/pdr/tutorials/05-make/index.html) or [read a lot more](https://www.gnu.org/software/make/manual/)
 than this one example summary if you wish.
 
 
