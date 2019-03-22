@@ -73,7 +73,7 @@ int main(int argc, const char *argv[]) {
         tasks[i].from = i*step;
         tasks[i].to = (i+1)*step;
         tasks[i].getnum = fraction;
-        pthread_create(id+i, &attr, sum_array, tasks+i);
+        pthread_create(id+i, NULL, sum_array, tasks+i);
     }
 
     // wait for and combine the results
