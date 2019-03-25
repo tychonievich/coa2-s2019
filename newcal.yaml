@@ -190,7 +190,7 @@ assignments:
         link: pa04-tlb.html
         open: 2019-03-01 14:00:00
         due: 2019-03-22 14:00:00
-        late-days: 4
+        late-days: 5
         files: ["*.c", "*.h", Makefile, '*']
 
     PA05:
