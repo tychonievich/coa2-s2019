@@ -18,8 +18,6 @@ You should design your own data structures, etc, to make this work properly.
 
 The public API should be the following `tlb.h`
 
-> Note: there was an inconsistency between the comment and the spec, fixed 2019-03-19 08:38 EDT. `tlb_peek` should return 1 for **most**, not **least**, recently used. If you had a working solution with the old definition, adding `return 5-previous_return` should update to the new version.
-
 ```c
 #include "config.h" /* see PA02 for guidance on this file */
 #include "mlpt.h"   /* see PA02 this file */
@@ -51,12 +49,12 @@ size_t tlb_translate(size_t va);
 Note that we do not have a `tlb_allocate`. This is by design: allocation is performed by software (a part of the operating system, accessed through a system call) and not by the hardware.
 
 You should submit `tlb.h`, and other `.h` and `.c` files you create,
-and a `Makefile` that depends on `mlpt.a` for its implementation of `translate` and produces, as its default target, `tlb.a` with a definition of the three functions listed above.
+and a `Makefile` that depends on `mlpt.a` for its implementation of `translate` and produces, as its default target, `libtlb.a` with a definition of the three functions listed above.
 And example target might look like
 
 ````makefile
-tlb.a: mlpt.a config.h $(objects)
-	ar rcs tlb.a $(objects)
+libtlb.a: config.h $(objects)
+	ar rcs libtlb.a $(objects)
 ````
 
 # Separation of Concerns

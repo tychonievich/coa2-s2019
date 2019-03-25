@@ -65,19 +65,24 @@ Code reviews will occur after PA03 closes. To prepare for these
 
 Prepare your code for delivery. In particular,
 
-- Adjust your `Makefile` to have, as its default target, `mlpt.a`,
+- Adjust your `Makefile` to have, as its default target, `libmlpt.a`,
 	a library with exported symbols including the three defined in `mlpt.h`
 	and not including `main`.
 	
 	A typical command might look like
 	
 	````makefile
-	mlpt.a: $(objects)
-		ar rcs mlpt.a $(objects)
+	libmlpt.a: $(objects)
+		ar rcs libmlpt.a $(objects)
 	````
 	
 	The default (what happens if you just type `make`)
 	is the first target in the Makefile.
+	
+	To use a library file like this, you'd add to your LDFLAGS two flags:
+	
+	- `-L.` means "look for library files in the current directory"
+	- `-lmlpt` means "look for library files `libmlpt.a` or `libmplt.so`"
 
 - Write a `README` explaining (at a minimum)
 	- How to customize `config.h`, with some guidance on how to pick values for that file.
