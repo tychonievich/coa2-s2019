@@ -1,5 +1,6 @@
 ---
 title: Parallel Game of Life
+license: Copyright © 2019 Charles Reiss and Luther Tychonievich. 
 ...
 
 # Your Task
