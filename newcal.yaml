@@ -202,8 +202,10 @@ assignments:
         
     PA06:
         title: 'Fork'
+        link: pa06-fork.html
         open: 2019-03-29 14:00:00
         due: 2019-04-05 14:00:00
+        files: ["fork_run.c"]
 
     PA07:
         title: 'Life'
