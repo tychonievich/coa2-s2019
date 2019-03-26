@@ -27,7 +27,8 @@ int main(int argc, const char *argv[]) {
     int a1 = my_system("sleep 1; echo hi");
     int a2 = my_system("echo bye");
     int a3 = my_system("flibbertigibbet 23");
-    printf("%d %d %d\n", WEXITSTATUS(a1), WEXITSTATUS(a2), WEXITSTATUS(a3));
+    printf("%d %d %d\n", 
+        WEXITSTATUS(a1), WEXITSTATUS(a2), WEXITSTATUS(a3));
 }
 ```
 
@@ -43,7 +44,9 @@ should print
 
 ```c
 int main(int argc, const char *argv[]) {
-    my_system("echo -n 'type something: '; read got; echo Thanks for typing \\\"\"$got\"\\\"");
+    my_system("echo -n 'type something: ';"
+        " read got;"
+        " echo Thanks for typing \\\"\"$got\"\\\"");
 }
 ```
 
@@ -65,7 +68,8 @@ I am not aware of a standard library function that does this, but if you find on
 ```c
 int main() {
     printf("Hi!\n");
-    printf("Text: [[[%s]]]\n", getoutput("echo 1 2 3; sleep 2; echo 5 5"));
+    printf("Text: [[[%s]]]\n", 
+        getoutput("echo 1 2 3; sleep 2; echo 5 5"));
     printf("Bye!\n");
 }
 ```
