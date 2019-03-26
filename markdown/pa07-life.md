@@ -6,7 +6,7 @@ title: Parallel Game of Life
 
 ## Before you code
 
-Examine the supplied [skeleton code](files/life-c-skeleton.c) which implements [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life).
+Examine the supplied [skeleton code](files/life-c-skeleton.tar.gz) which implements [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway's_Game_of_Life).
 You should only edit `life-parallel.c`, but that interacts with many other files in the package.
 
 Make sure you look at `input/README.md`, as well as `life.h` and any other files you wish.
