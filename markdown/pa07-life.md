@@ -63,6 +63,8 @@ Uncomment the lines of `main.c` that are marked as appropriate to uncomment afte
 
 # Tips
 
+This assignment was designed to be a natural fit for [barriers](pthreads.html#barrier). You are strongly encourage to get a barrier-based solution working first before attempting any other approaches.
+
 You should choose some way to split up the grid between threads. You will get best performance if each thread works on a part of the grid that is contiguous in memory, so you get better locality within a thread. This also will avoid performance problems associated with two processors trying to modify data in different parts of the same cache block.
 
 To compute the value of a cell in generation $i$, one needs the value of its neighbors in generation $i-1$. Barriers are one way to make sure that the values from generation $i-1$ are available before any thread starts computing generation $i$.
