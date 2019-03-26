@@ -119,6 +119,8 @@ To do this, use the following outline.
         send information to the parent as it arrives
         instead of buffering it all in kernel memory first.
 
+You may assume that the command exists and executes normally; no need to add any error-handling logic.
+
 As a tip, one of the easiest ways to read everything there is to read
 is to use `getdelim`{.c} with the delimiter `'\0'`{.c}.
 `getdelim`{.c} wants a `FILE *`{.c}, not a file descriptor;
