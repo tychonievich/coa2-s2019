@@ -209,8 +209,10 @@ assignments:
 
     PA07:
         title: 'Life'
+        link: pa07-life.html
         open: 2019-03-05 14:00:00
         due: 2019-04-19 14:00:00
+        files: ["life-parallel.c"]
         
     PA08:
         title: 'Pipeline'
