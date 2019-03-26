@@ -63,16 +63,18 @@ Uncomment the lines of `main.c` that are marked as appropriate to uncomment afte
 
 # Tips
 
-This assignment was designed to be a natural fit for [barriers](pthreads.html#barrier). You are strongly encourage to get a barrier-based solution working first before attempting any other approaches.
+1.  This assignment was designed to be a natural fit for [barriers](pthreads.html#barrier). You are strongly encourage to get a barrier-based solution working first before attempting any other approaches.
 
-You should choose some way to split up the grid between threads. You will get best performance if each thread works on a part of the grid that is contiguous in memory, so you get better locality within a thread. This also will avoid performance problems associated with two processors trying to modify data in different parts of the same cache block.
+1.  You should choose some way to split up the grid between threads. You will get best performance if each thread works on a part of the grid that is contiguous in memory, so you get better locality within a thread. This also will avoid performance problems associated with two processors trying to modify data in different parts of the same cache block.
 
-To compute the value of a cell in generation $i$, one needs the value of its neighbors in generation $i-1$. Barriers are one way to make sure that the values from generation $i-1$ are available before any thread starts computing generation $i$.
+1.  To compute the value of a cell in generation $i$, one needs the value of its neighbors in generation $i-1$. Barriers are one way to make sure that the values from generation $i-1$ are available before any thread starts computing generation $i$.
 
-The supplied code calls `LB_swap()` to exchange boards. If one uses that code as is, one must ensure that all threads stop accessing the boards before the swap happens and don’t start accessing the boards again until the swap finishes.
+1.  The supplied code calls `LB_swap()` to exchange boards. If one uses that code as is, one must ensure that all threads stop accessing the boards before the swap happens and don’t start accessing the boards again until the swap finishes.
 
-An alternative, which calls wait on barriers fewer times each iteration, is to avoid swapping by having an “even” state and “odd” state and choose which board to write to based on the generation number. (In even iterations, threads would use the “odd” version of the state to write to the “even” state; and in odd iterations, threads would use the “even” version of the state to write to the “odd” state.) In this way, rather than waiting for the swap to finish before starting the next generation, threads just need to wait for all other threads to have finished the current generation.
+1.  An alternative, which calls wait on barriers fewer times each iteration, is to avoid swapping by having an “even” state and “odd” state and choose which board to write to based on the generation number. (In even iterations, threads would use the “odd” version of the state to write to the “even” state; and in odd iterations, threads would use the “even” version of the state to write to the “odd” state.) In this way, rather than waiting for the swap to finish before starting the next generation, threads just need to wait for all other threads to have finished the current generation.
 
-You should be able to reuse almost all of the `simulate_life_serial` code. You will probably need to split it into at least two functions — one that represents the work done in separate threads and one that spawns the threads and waits for them to finish.
+1.
+    You should be able to reuse almost all of the `simulate_life_serial` code. You will probably need to split it into at least two functions — one that represents the work done in separate threads and one that spawns the threads and waits for them to finish.
 
-If you find yourself tempted to use a global variable (such as a global mutex or barrier), you can usually get away with adding it as a field of a `struct` passed in by reference to your thread function's `void *` parameter instead.
+1.
+    If you find yourself tempted to use a global variable (such as a global mutex or barrier), you can usually get away with adding it as a field of a `struct` passed in by reference to your thread function's `void *` parameter instead.
