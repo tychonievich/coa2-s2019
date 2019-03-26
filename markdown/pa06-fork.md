@@ -2,10 +2,13 @@
 title: Fork and run
 ...
 
-Write a single file `fork_run.c` that defines the following two functions.
+Write and submit a single file `fork_run.c`
+that defines the following two functions.
 You should not submit any other files (i.e., no `.h` files, `Makefile`, etc).
+You may include helper functions in the file,
+but it should not contain `main`.
 
-## `int my_system(const char *command)`
+# `int my_system(const char *command)`
 
 This is a simplified version of the `system` standard library function (see `man 3 system`{.bash} for details). You should handle all aspects of the function as described in the manual page **except**
 
@@ -51,7 +54,7 @@ should prompt for user input, wait until it is provided, and then repeat what th
 {/}
 
 
-## `char *getoutput(const char *command)`
+# `char *getoutput(const char *command)`
 
 This should behave something like `system`, except that instead of letting the child print to stdout, it should collect what the child prints and return it as a `malloc`-allocated `char *`.
 
