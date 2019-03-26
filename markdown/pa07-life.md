@@ -49,17 +49,17 @@ Additional constraints:
 
 Uncomment the lines of `main.c` that are marked as appropriate to uncomment after `simulate_life_parallel` is written. Then test your code, as e.g. by running
 
-- `./life` to see the usage hints.
+- `./life`{.bash} to see the usage hints.
 
-- `life-asan 10 input/make-a time` to check for memory leaks (but do not trust its timing, the address sanitizer slows things down a lot).
+- `life-asan 10 input/make-a time`{.bash} to check for memory leaks (but do not trust its timing, the address sanitizer slows things down a lot).
 
-- `./life 0 input/o0075 serial-result` to ensure you can load an example file.
+- `./life 0 input/o0075 serial-result`{.bash} to ensure you can load an example file.
 
-- `./life 110 input/o0075 serial-result` to ensure you can simulate an example file.
+- `./life 110 input/o0075 serial-result`{.bash} to ensure you can simulate an example file.
 
-- `./life 10 input/make-a time` to time the `make-a` file with 10 steps.
+- `./life 10 input/make-a time`{.bash} to time the `make-a` file with 10 steps.
 
-- `./time-examples.sh` to get a sense of how you are doing on parallel performance.
+- `./time-examples.sh`{.bash} to get a sense of how you are doing on parallel performance.
 
 # Tips
 
