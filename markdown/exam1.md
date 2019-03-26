@@ -79,7 +79,7 @@ Q11.2       True
 Q11.3       True
 Q11.4       False
 Q11.5       True
-Q11.6      True
+Q11.6       True
 Q12.1       True
 Q12.2       True
 Q12.3       *(dropped)*
@@ -87,6 +87,6 @@ Q12.4       False
 Q12.5       True
 Q13         2
 Q14         45
-Q15         2^66
+Q15         2^66^
 Q16         0x22446400
 Q16         0x224466400
