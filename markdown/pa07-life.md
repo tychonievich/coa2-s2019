@@ -1,6 +1,6 @@
 ---
 title: Parallel Game of Life
-authors:
+author:
     - Charles Reiss
     - Luther Tychonievich. 
 ...
