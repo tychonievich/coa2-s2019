@@ -53,3 +53,40 @@ To improve my learning going forward, I plan to ...
 ```
 
 If you do not submit a wrapper, your initial exam score will stand as your exam performance. If you do, that score can only go up, not down.
+
+# Key
+
+Question    Key
+--------    -------------
+Q1          2
+Q2.1        False
+Q2.2        True
+Q2.3        True
+Q2.4        True
+Q2.5        True
+Q2.6        False
+Q2.7        False
+Q3          STHRN
+Q4          4
+Q5          3
+Q6          2
+Q7          1
+Q8          2
+Q9          APM
+Q10         1 or 2
+Q11.1       True
+Q11.2       True
+Q11.3       True
+Q11.4       False
+Q11.5       True
+Q11.6      True
+Q12.1       True
+Q12.2       True
+Q12.3       *(dropped)*
+Q12.4       False
+Q12.5       True
+Q13         2
+Q14         45
+Q15         2^66
+Q16         0x22446400
+Q16         0x224466400
