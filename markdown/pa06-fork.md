@@ -58,6 +58,8 @@ should prompt for user input, wait until it is provided, and then repeat what th
 
 This should behave something like `system`, except that instead of letting the child print to stdout, it should collect what the child prints and return it as a `malloc`-allocated `char *`.
 
+I am not aware of a standard library function that does this, but if you find one do not use it; do this by forking, execing, and piping yourself.
+
 {.example ...} The following main function
 
 ```c
@@ -95,7 +97,7 @@ To do this, use the following outline.
 2. In the child, 
     
     a. replace stdout with the write-end of the pipe.
-        The `dup2` command^[`man 2 dup2`{.bash}] is used for this,
+        The `dup2` command is used for this,
         copying one file descriptor with a new number.
         You want to copy the write-end of the pipe to `1`, stdout.
     b. close both of the pipe file descriptors.
