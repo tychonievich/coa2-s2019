@@ -93,10 +93,10 @@ To do this, use the following outline.
 1. Create a **pipe**.
     A pipe looks like a pair of file decriptors,
     one opened for reading and the other for writing,
-    and is a tool used extensively to help processed talk to each other.
+    and is a tool used extensively to help processes talk to each other.
     See `man 2 pipe`{.bash} for details.
     
-    Make sure you invoke `pipe` *before* you invoke `fork`.
+    Make sure you invoke `pipe` *before* you invoke `fork` so that both processes have access to the same pipe.
 
 2. In the child, 
     
@@ -107,6 +107,7 @@ To do this, use the following outline.
     b. close both of the pipe file descriptors.
         You don't need the read end in the child,
         and the write-end is now duplicated as stdout.
+    c. exec, etc, as you did for `my_system`.
 
 3. In the parent,
     
@@ -115,7 +116,8 @@ To do this, use the following outline.
         `malloc`ing enough space to store it all.
     c. close the read end of the pipe when you are done reading.
     d. `waitpid` on the child *after* reading everything.
-        This is not strictly necessary, but it lets the OS
+        This is not strictly necessary (you can wait first and it should work),
+        but waiting after reading lets the OS
         send information to the parent as it arrives
         instead of buffering it all in kernel memory first.
 
