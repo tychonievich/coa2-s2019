@@ -8,6 +8,13 @@ Exam 2 was given in class on Monday 1 April, 2019.
 The PDF of the exam is available [here](files/s2019exam2.pdf).
 You can find your individual responses on the submission page.
 
+Stat        Exam 1       Exam 2
+------      -------      -------
+High        91.1%        93.1%
+Median      80.6%        77.8%
+Mean        78.6%        76.0%
+Low         54.8%        52.2%
+
 A few notes that may not be evident from the uploads:
 
 - The full-page **Q11** was worth 4 points,

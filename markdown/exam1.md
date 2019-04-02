@@ -8,6 +8,14 @@ Exam 1 was given in class on Monday 18 February, 2019.
 The PDF of the exam is available [here](files/s2019exam1.pdf).
 You can find your individual responses on the submission page.
 
+
+Stat    Exam 1
+------  -------
+High    91.1%
+Median  80.6%
+Mean    78.6%
+Low     54.8%
+
 # Wrapping-up the Exam Experience
 
 On or before Friday 1 March, you may submit an exam wrapper^[See [the teaching commons](https://teachingcommons.stanford.edu/teaching-talk/exam-wrappers) for a decent introduction to the idea of an exam wrapper.] to make up some of your lost points. This should be a plain-text document named `exam1wrap.txt` containing the following sections:
