@@ -275,6 +275,9 @@ assignments:
                 - plans seem likely to improve learning
     Exam2:
         due: 2019-04-01 14:50:00
+        files: [responses.txt]
+        link: exam2.html
+        rubric: {"kind": "percentage"}
     Exam2 Wrapper:
         due: 2019-04-12 14:00:00
         files: [exam2wrap.txt]
