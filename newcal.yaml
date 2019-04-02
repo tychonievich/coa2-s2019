@@ -250,6 +250,7 @@ assignments:
         
     Exam1:
         due: 2019-02-18 14:50:00
+        late-days: 0
         files: [responses.txt]
         link: exam1.html
         rubric: {"kind": "percentage"}
@@ -275,6 +276,7 @@ assignments:
                 - plans seem likely to improve learning
     Exam2:
         due: 2019-04-01 14:50:00
+        late-days: 0
         files: [responses.txt]
         link: exam2.html
         rubric: {"kind": "percentage"}
