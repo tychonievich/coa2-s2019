@@ -14,6 +14,7 @@ High        91.1%        93.1%
 Median      80.6%        77.8%
 Mean        78.6%        76.0%
 Low         54.8%        52.2%
+StdDev       9.6%        11.3%
 
 A few notes that may not be evident from the uploads:
 
