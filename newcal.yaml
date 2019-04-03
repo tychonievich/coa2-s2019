@@ -259,6 +259,7 @@ assignments:
         due: 2019-03-01 14:00:00
         files: [exam1wrap.txt]
         link: exam1.html
+        weight: 0.5
         rubric: 
             kind: hybrid
             auto-weight: 0
@@ -285,6 +286,7 @@ assignments:
         due: 2019-04-12 14:00:00
         files: [exam2wrap.txt]
         link: exam2.html
+        weight: 0.5
         rubric: 
             kind: hybrid
             auto-weight: 0
@@ -303,4 +305,4 @@ assignments:
                 - plans seem likely to improve learning
     Exam3:
         due: 2019-05-02 17:00:00
-        weight: 2
+        weight: 3
