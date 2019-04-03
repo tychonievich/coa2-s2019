@@ -15,6 +15,7 @@ High    91.1%
 Median  80.6%
 Mean    78.6%
 Low     54.8%
+StdDev   9.6%
 
 # Wrapping-up the Exam Experience
 
