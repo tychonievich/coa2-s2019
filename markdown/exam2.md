@@ -29,7 +29,7 @@ A few notes that may not be evident from the uploads:
 
 # Wrapping-up the Exam Experience
 
-On or before Friday 12 April, you may submit an exam wrapper^[See [the teaching commons](https://teachingcommons.stanford.edu/teaching-talk/exam-wrappers) for a decent introduction to the idea of an exam wrapper.] to make up some of your lost points. This should be a plain-text document named `exam1wrap.txt` containing the following sections:
+On or before Friday 12 April, you may submit an exam wrapper^[See [the teaching commons](https://teachingcommons.stanford.edu/teaching-talk/exam-wrappers) for a decent introduction to the idea of an exam wrapper.] to make up some of your lost points. This should be a plain-text document named `exam2wrap.txt` containing the following sections:
 
 1. Preparation
 
