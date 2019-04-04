@@ -17,6 +17,18 @@ Make sure you look at `input/README.md`, as well as `life.h` and any other files
 The provided code will compile and run.
 We encourage experimenting with it before adding any code of your own.
 
+{.aside ...} Address sanitizer on department machines
+
+Some students have reported that `clang` fails to build the `life-asan` version.
+There are at least two known workarounds.
+
+- Change the makefile to use `gcc` instead of `clang`, and `module load gcc`{.sh} instead of `module load clang-llvm`{.sh}.
+
+- Use `make life`{.sh} instead of `make` to only build the non-address-sanitizer version.
+
+I've asked the systems staff to add asan for clang, but it is not yet clear when that will be done.
+{/}
+
 Make sure you understand how `simulate_life_serial` works.
 You'll be making a (more complicated) parallel version of this, and are unlikely to be successful if you don't understand this starting point.
 
