@@ -38,6 +38,8 @@ should print
     bye
     sh: 1: flibbertigibbet: not found
     0 0 127
+
+(note: the details of the "not found" line will vary based on the version of `sh` installed on the computer)
 {/}
 
 {.example ...} The following main function
