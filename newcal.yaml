@@ -201,6 +201,25 @@ assignments:
         due: 2019-03-29 14:00:00
         files: ["dp_arbitrator.c", "dp_hierarchy.c", "dp_message.c"]
         
+        rubric: 
+            kind: hybrid
+            auto-weight: 0
+            auto-late-days: 0
+            late-penalty: 1
+            human:
+                - all -- make argv[1] or 5 threads
+                - all -- malloc threads and locks
+                - all -- all threads get same set of locks (handle locks only by pointer, not value)
+                - all -- free what you malloc
+                
+                - arbitrator -- one extra mutex shared by all threads
+                - arbitrator -- shared mutex locks acquiring both other mutexes
+                - arbitrator -- shared mutex does not lock eating or releasing
+
+                - hierarchy -- no extra synchronization primitives
+                - hierarchy -- case with n,0 locks 0 before n
+                - hierarchy -- no extra synchronization primitives
+        
     PA06:
         title: 'Fork'
         link: pa06-fork.html
