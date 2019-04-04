@@ -212,13 +212,13 @@ assignments:
                 - all -- all threads get same set of locks (handle locks only by pointer, not value)
                 - all -- free what you malloc
                 
-                - arbitrator -- one extra mutex shared by all threads
-                - arbitrator -- shared mutex locks acquiring both other mutexes
-                - arbitrator -- shared mutex does not lock eating or releasing
+                - dp_arbitrator.c -- one extra mutex shared by all threads
+                - dp_arbitrator.c -- shared mutex locks acquiring both other mutexes
+                - dp_arbitrator.c -- shared mutex does not lock eating or releasing
 
-                - hierarchy -- no extra synchronization primitives
-                - hierarchy -- case with n,0 locks 0 before n
-                - hierarchy -- no extra synchronization primitives
+                - dp_hierarchy.c -- no extra synchronization primitives
+                - dp_hierarchy.c -- case with n,0 locks 0 before n
+                - dp_hierarchy.c -- no extra synchronization primitives
         
     PA06:
         title: 'Fork'
