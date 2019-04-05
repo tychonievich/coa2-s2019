@@ -84,8 +84,9 @@ In generally it is assumed that if you write good concurrent code you have incor
 Many modern languages provide specialized syntax-level constructs like Java's `synchronized` keyword to make some kinds of deadlock (such as return without unlocking) impossible.
 These do not prevent all forms of deadlock, however.
 
-Some libraries for concurrency intentionally design an API where no combination of API calls can create deadlock.
-Often these are described as "message-passing" approaches as opposed to "shared memory" approaches;
+Some libraries for concurrency intentionally design an API where either (a) no combination of API calls can create deadlock or (b) common use-cases cannot create deadlock.
+A common family of such APIs are called "message-passing" approaches,
+as opposed to "shared memory" approaches;
 the "messages" are often implemented under the hood as lock-free concurrent queues,
 stored in shared memory that the API does not expose to the programmer.
 
