@@ -44,7 +44,7 @@ It is what is provided by correct use of things like `pthread_mutex_lock(&m)`{.c
 
 > The **result** of execution is the same as if each process was interleaved **in some order** on a single sequential processor.
 
-This definition is similar to *strong* consistency, but is based on *result*.
+This definition is similar to *strong* consistency, but is based on *result* not event.
 Some people even use the terms interchangeably.
 
 Sequential consistency, being about *the* result (instead of *each* result), requires [Eventual consistency](#eventual-consistency).
