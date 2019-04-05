@@ -64,13 +64,13 @@ lectures:
     - deadlock
     - deadlock
     - consistency models
-    - concurrency bugs
-    - concurrency bugs
-    - all bugs exploitable
+    - processors revisited
+    - pipeline
+    - pipeline
 
-    - [power, pipeline]
-    - [pipeline, speculation]
-    - [speculation, out-of-order]
+    - power
+    - speculation
+    - out-of-order
     - multicore
     - processor gotchas
     - [portsmash, heartbleed, spectre]
