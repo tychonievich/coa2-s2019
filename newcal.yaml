@@ -107,6 +107,7 @@ reading:
     concurrency: '[thread and process §1--2](thread.html)'
     "`pthreads`": '[pthreads](pthreads.html)'
     deadlock: '[deadlock](deadlock.html)'
+    consistency models: '[consistency](consistency.html)'
 
 assignments:
     ".groups":
