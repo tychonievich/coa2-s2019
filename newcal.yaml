@@ -71,10 +71,10 @@ lectures:
     - power
     - speculation
     - out-of-order
-    - multicore
-    - processor gotchas
+    - [portsmash, heartbleed, spectre]
     - [portsmash, heartbleed, spectre]
     - security/speed tradeoffs
+    - review
     
 check out:
     - 'https://www.youtube.com/watch?v=I5mRwzVvFGE'
