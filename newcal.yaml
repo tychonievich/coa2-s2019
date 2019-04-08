@@ -108,7 +108,7 @@ reading:
     "`pthreads`": '[pthreads](pthreads.html)'
     deadlock: '[deadlock](deadlock.html)'
     consistency models: '[consistency](consistency.html)'
-    processors revisited: '[coa1 processor](../../COA1/F2018/pa03-simulator.html)'
+    processors revisited: '[COA1 processor](../../COA1/F2018/pa03-simulator.html)'
     
 assignments:
     ".groups":
