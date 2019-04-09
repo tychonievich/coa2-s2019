@@ -121,7 +121,7 @@ assignments:
             rubric: {"kind":"percentage"}
         Quiz:
             portion: "20"
-            drop: 1
+            drop: 2
             portion: "10"
             duration: -1
             rubric: {"kind":"percentage"}
