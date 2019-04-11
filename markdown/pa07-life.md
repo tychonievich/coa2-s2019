@@ -57,8 +57,9 @@ Additional constraints:
 
 1. You must call the appropriate `pthread_***_destroy` for each `pthread_***_init` you call to reclaim any pthreads-allocated memory.
 
-1. On a multi-core machine, your parallel code must be noticeably faster than the serial code when run on sufficiently large boards for sufficiently many iterations
+1. On a multi-core machine, your parallel code must be noticeably faster than the serial code when run on sufficiently large boards for sufficiently many iterations.
 
+1. And, of course, you are still bound by all the usual [course policies](policies.html#write-your-own-code).
 
 ## Test your code.
 

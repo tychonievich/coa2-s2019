@@ -79,6 +79,8 @@ lectures:
 check out:
     - 'https://www.youtube.com/watch?v=I5mRwzVvFGE'
     - 'about specter'
+    - https://www.microsoft.com/en-us/research/publication/a-fork-in-the-road/
+    - https://stackoverflow.com/questions/13893085/posix-spawnp-and-piping-child-output-to-a-string
 
 
 labs: []
