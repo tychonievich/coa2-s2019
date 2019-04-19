@@ -43,19 +43,19 @@ Assume that this is run on a five-stage pipeline, where
 
 - decode needs to stall until values (program register and condition code) are available, but only needs values by the end of its cycle.
    
-   e.g., if a memory read is followed by an operation on the read value, the decode stage of the operation can be co-scheduled with the memory stage of the read.
+   - e.g., if a memory read is followed by an operation on the read value, the decode stage of the operation can be co-scheduled with the memory stage of the read.
     
-    |     |   |   |   |   |   |   |   |
-    |:----|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-    |read | F | D | E | M | W |   |   |
-    |use  |   | F | D | D | E | M | W |
+        |     |   |   |   |   |   |   |   |
+        |:----|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+        |read | F | D | E | M | W |   |   |
+        |use  |   | F | D | D | E | M | W |
 
-    e.g., if a computation is followed by an operation on the computed value, the decode stage of the operation can be co-scheduled with the execute stage of the computation.
+    - e.g., if a computation is followed by an operation on the computed value, the decode stage of the operation can be co-scheduled with the execute stage of the computation.
    
-    |        |   |   |   |   |   |   |
-    |:-------|:-:|:-:|:-:|:-:|:-:|:-:|
-    |compute | F | D | E | M | W |   |
-    |use     |   | F | D | E | M | W |
+        |        |   |   |   |   |   |   |
+        |:-------|:-:|:-:|:-:|:-:|:-:|:-:|
+        |compute | F | D | E | M | W |   |
+        |use     |   | F | D | E | M | W |
 
 - computation not available until the end of execute includes
     - results of arithmetic, logic, and address computation
