@@ -41,6 +41,10 @@ which has been compiled to (numbers inserted for ease of reference)
 
 Assume that this is run on a five-stage pipeline, where
 
+- every instruction must go through all five stages in order
+
+- each stage may handle at most one instruction per cycle
+
 - decode needs to stall until values (program register and condition code) are available, but only needs values by the end of its cycle.
    
    - e.g., if a memory read is followed by an operation on the read value, the decode stage of the operation can be co-scheduled with the memory stage of the read.
