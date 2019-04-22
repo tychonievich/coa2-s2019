@@ -238,6 +238,14 @@ assignments:
         open: 2019-03-05 14:00:00
         due: 2019-04-19 14:00:00
         files: ["life-parallel.c"]
+        rubric: 
+            kind: hybrid
+            auto-weight: 0.8
+            auto-late-days: 2
+            late-penalty: 1
+            human:
+                - code could work for any number of threads
+                - no race conditions
         
     PA08:
         title: 'Pipeline'
