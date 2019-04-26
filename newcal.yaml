@@ -71,8 +71,8 @@ lectures:
     - power
     - speculation
     - out-of-order
-    - [portsmash, heartbleed, spectre]
-    - [portsmash, heartbleed, spectre]
+    - [meltdown, spectre]
+    - [meltdown, spectre]
     - security/speed tradeoffs
     - review
     
