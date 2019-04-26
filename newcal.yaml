@@ -73,7 +73,7 @@ lectures:
     - out-of-order
     - [meltdown, spectre]
     - [meltdown, spectre]
-    - security/speed tradeoffs
+    - ask me anything
     - review
     
 check out:
@@ -112,6 +112,7 @@ reading:
     consistency models: '[consistency](consistency.html)'
     processors revisited: '[COA1 processor](../../COA1/F2018/pa03-simulator.html)'
     // pipeline: ['[sequential diagram](files/seq.png)', '[pipelined diagram](files/pipe.png)']
+    ask me anything: ['[ask here](http://www.tricider.com/brainstorming/2bnaQ7fhZZ3)']
     
 assignments:
     ".groups":
