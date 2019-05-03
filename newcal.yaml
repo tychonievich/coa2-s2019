@@ -340,3 +340,5 @@ assignments:
     Exam3:
         due: 2019-05-02 17:00:00
         weight: 3
+        files: [responses.txt]
+        link: exam3.html
