@@ -392,5 +392,28 @@ Flow
     
 
 [^webconsole]:
-    I like to show other power-user PL-CLI interfaces they won't expect, such as the web browser javascript console. For example, I have done enough web scraping in my day that I know I can go to cs.virginia.edu and run type `a = ''; document.querySelectorAll('div.image').forEach(x => a += x.style.backgroundImage.replace('url(','<img src=').replace(')','/>')); document.head.innerHTML = ''; document.body.innerHTML = a;`{.javascript} to get a page of images about the latest news story or `a=''; document.querySelectorAll('figure img').forEach(x => a+='<img src="'+x.src+'"/>'); document.head.innerHTML = ''; document.body.innerHTML = a;`{.javascript} to get a page of faculty photos, so I sometimes will create something like this live for the students.
+    I like to show other power-user PL-CLI interfaces they won't expect, such as the web browser javascript console. For example, I have done enough web scraping in my day that I know I can go to cs.virginia.edu and type
+    
+    ```javascript
+    a = ''
+    document.querySelectorAll('div.image')
+        .forEach(x => a += x
+            .style
+            .backgroundImage
+            .replace('url(','<img src=')
+            .replace(')','/>')
+        )
+    document.head.innerHTML = ''; document.body.innerHTML = a;
+    ```
+    
+    to get a page of images about the latest news story or 
+    
+    ```javascript
+    a=''; 
+    document.querySelectorAll('figure img')
+        .forEach(x => a+='<img src="'+x.src+'"/>');
+    document.head.innerHTML = ''; document.body.innerHTML = a;
+    ```
+    
+    to get a page of faculty photos, so I sometimes will create something like this live for the students.
 
