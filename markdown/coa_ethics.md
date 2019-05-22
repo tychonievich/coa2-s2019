@@ -213,9 +213,16 @@ Flow
 
     5. Run a real experiment showing actual power usage
     
-        {.example}
+        {.example ...}
         Using a native-linux laptop with an Intel processor,
-        show total micro-Joules consumed since boot (e.g. `cat /sys/class/powercap/intel-rapl/*/energy_uj`{.bash}) and use that to create similar programs in C and Python and compare usage[^watt-code]
+        
+        Show total micro-Joules consumed since boot
+        :   `cat /sys/class/powercap/intel-rapl/*/energy_uj`{.bash}
+        
+        Create similar programs in C and Python and compare usage
+        :   See full code in footnote[^watt-code]
+        
+        {/}
 
     6. Lead a discussion around the question "Under what conditions should software engineers prioritize resource efficiency over business costs like developer time and time to market?"
 
