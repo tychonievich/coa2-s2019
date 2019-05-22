@@ -221,7 +221,6 @@ Flow
         
         Create similar programs in C and Python and compare usage
         :   See full code in footnote[^watt-code]
-        
         {/}
 
     6. Lead a discussion around the question "Under what conditions should software engineers prioritize resource efficiency over business costs like developer time and time to market?"
