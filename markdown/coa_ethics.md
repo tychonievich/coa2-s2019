@@ -3,6 +3,8 @@ title: COA Ethics lessons
 author: Luther Tychonievich
 ...
 
+This page is targeted to faculty leading discussions in COA1 and COA2, rather than to students.
+
 # Back Doors
 
 This topic should be addressed in two different lessons
@@ -282,6 +284,8 @@ Flow
 
 
 # Power allocation
+
+This topic should be addressed in two different lessons
 
 _I added this topic late in Spring 2019 after reading the March 2019 CACM article by Sepehr Vakil and Jennifer Higgs, "[It's About Power](https://cacm.acm.org/magazines/2019/3/234921-its-about-power/fulltext)". The discussion went very well and was referenced several times later in the term by the students. I hope to expand my coverage in future semesters._
 
