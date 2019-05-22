@@ -9,7 +9,7 @@ written by Richard Smith.
 
 import sys, re
 
-tag_open = re.compile(r'^\{\.([a-z]+)\s*(\.{3})?\}\s*(.*)', re.DOTALL)
+tag_open = re.compile(r'^\s*\{\.([a-z]+)\s*(\.{3})?\}\s*(.*)', re.DOTALL)
 tag_close = re.compile(r'^(.*)\{/\}\s*$', re.DOTALL)
 tag_import = re.compile(r'^\{#include\s+(.*)\}$')
 
