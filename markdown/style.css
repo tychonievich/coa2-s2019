@@ -141,7 +141,7 @@ dt,h2,h3,h4,h5,h6 { clear:both; }
     color: #005A9C;
 }
 
-.exercise {
+.exercise , .ednote {
     margin: 1em 0em 1em 0em;
     background: rgba(255,127,0,0.13333333);
     border-left: rgba(255,127,0,0.2666666) solid 0.5ex;
@@ -166,14 +166,6 @@ dt,h2,h3,h4,h5,h6 { clear:both; }
     content: "Aside \2014  ";
     font-style: italic;
 }
-
-.ednote {
-    margin: 1em 0em 1em 0em;
-    background: rgba(200,100,0,0.0625);
-    border-left: rgba(200,100,0,0.1225) solid 0.5ex;
-    padding: 0.5em 1em;
-}
-
 
 
 .author + .author:before { content: " and " }
