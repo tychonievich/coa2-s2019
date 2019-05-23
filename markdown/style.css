@@ -167,5 +167,13 @@ dt,h2,h3,h4,h5,h6 { clear:both; }
     font-style: italic;
 }
 
+.ednote {
+    margin: 1em 0em 1em 0em;
+    background: rgba(200,100,0,0.0625);
+    border-left: rgba(200,100,0,0.1225) solid 0.5ex;
+    padding: 0.5em 1em;
+}
+
+
 
 .author + .author:before { content: " and " }
