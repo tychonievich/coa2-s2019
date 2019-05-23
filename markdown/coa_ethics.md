@@ -137,10 +137,11 @@ Flow
     
     6. Review ACM code of ethics^[<https://ethics.acm.org/>], article 2.9. Discuss how "usably" is very often seen as at odds with "secure" in part because no one uses a system that cannot be marketed and sold.
 
+{.aside ...}
 Missing component of this lesson
-:   _I do not yet have a good "and therefore what" closer for this discussion.
-    I tried "your boss will likely be on the other side of you; how should you react?" but that didn't engage their attention._
-
+:   I do not yet have a good "and therefore what" closer for this discussion.
+    I tried "your boss will likely be on the other side of you; how should you react?" but that didn't engage their attention.
+{/}
 
 
 # Reporting procedures
@@ -287,7 +288,11 @@ Flow
 
 This topic should be addressed in two different lessons
 
-_I added this topic late in Spring 2019 after reading the March 2019 CACM article by Sepehr Vakil and Jennifer Higgs, "[It's About Power](https://cacm.acm.org/magazines/2019/3/234921-its-about-power/fulltext)". The discussion went very well and was referenced several times later in the term by the students. I hope to expand my coverage in future semesters._
+{.aside ...}
+I added this topic late in Spring 2019 after reading the March 2019 CACM article by Sepehr Vakil and Jennifer Higgs, "[It's About Power](https://cacm.acm.org/magazines/2019/3/234921-its-about-power/fulltext)". The discussion went very well and was referenced several times later in the term by the students. I hope to expand my coverage in future semesters.
+
+That said, several components of this I have used in other contexts, hence some of my "I usually" notes.
+{/}
 
 ## Who is empowered?
 
@@ -313,7 +318,7 @@ Flow
     
     3. Explain that this technology "makes $X$ easier for some people, but not for others, just like we saw with _chopsticks or other previous example_. With your elbow partners, identify similar people who are differently enabled by this technology, both by knowledge and by accessibility."
     
-        _(note: that script needs work)_
+        {.aside} that script needs work
     
     4. After they've had some time to discuss in small groups, ask some groups to share. Lead a discussion on if the identified limitations are intrinsic or mitigable, and if mitigable ask for suggestions on how to mitigate them.
     
@@ -327,7 +332,7 @@ Flow
         
     7. Discuss some examples of "it's powerful if you know how to use it," such as bad or missing documentation, idiosyncratic user interfaces, etc.
         
-        _I do not have a good example here. I tried getfacl/setfacl vs chmod but it did not go over well. I tried showing some of the tools I created for class with incomplete UI, but the overhead was to great._
+        {.aside} I do not have a good example here. I tried getfacl/setfacl vs chmod but it did not go over well. I tried showing some of the tools I created for class with incomplete UI, but the overhead was to great.
     
     8. Discuss some examples of "guns don't kill people, people kill people, but they find it a lot easier with guns than without," such as
     
@@ -339,10 +344,13 @@ Flow
     
     9. Discuss the impedance of tedium: people are much more likely to do what is easy to do even if they know how to do the harder thing too.
     
-        _I do not have a good example here. I once tried showing the dozens of steps needed to put one quiz question into collab, but because it was tedious I lost attention and in the end they didn't relate. I've considered the default permissions of new files and directories in Linux, but don't feel it is ideal._
+        {.aside} I do not have a good example here. I once tried showing the dozens of steps needed to put one quiz question into collab, but because it was tedious I lost attention and in the end they didn't relate. I've considered the default permissions of new files and directories in Linux, but don't feel it is ideal.
 
-    10. Conclude with a summary _(there are too many steps in this lesson if it needs a summary)_ and an encouragement to consider who is (not) empowered by what they do in the future.
+    10. Conclude with a summary[^toolong] and an encouragement to consider who is (not) empowered by what they do in the future.
 
+
+[^toolong]:
+    {.aside} There are too many steps in this lesson if it needs a summary.
 
 ## "Power-user" interfaces
 
@@ -382,25 +390,27 @@ Flow
         
         - We need mandatory power-user training, CS education, etc.
         
-            _In reply I mention the idea of learning curves: it takes time to learn, time not used for other things, so what are we sacrificing?_
+            {.aside ...}
+            In reply I mention the idea of learning curves: it takes time to learn, time not used for other things, so what are we sacrificing?
             
-            _I also sometimes discuss the lack of qualified teachers and thus the long-term character of such solutions._
+            I also sometimes discuss the lack of qualified teachers and thus the long-term character of such solutions.
+            {/}
         
         - We should not make power-user interfaces; make all programs simple.
 
-            _In reply I ask how many people, given power, will willingly give it up to become equal with the unempowered._
+            {.aside} In reply I ask how many people, given power, will willingly give it up to become equal with the unempowered.
         
         - This isn't a problem; the casual user doesn't want that power and wouldn't know what to do with it if they had it.
             
-            _I don't have a single standard reply, but often can do some kind of echo-and-confirm "just to be clear, you're saying that people who don't know how to do something must not want the power to do it---power they don't even know they don't have?"_
+            {.aside} I don't have a single standard reply, but often can do some kind of echo-and-confirm "just to be clear, you're saying that people who don't know how to do something must not want the power to do it---power they don't even know they don't have?"
             
         - Once AI masters understanding what we want this problem will go away.
             
-            _I usually reply with something like "AI is just another class of applications, which themselves have power-user and casual-user interfaces. I can't predict the future, but at least on their current trajectory they are making the separation of cans and cannots more, not less, extreme."_
+            {.aside} I usually reply with something like "AI is just another class of applications, which themselves have power-user and casual-user interfaces. I can't predict the future, but at least on their current trajectory they are making the separation of cans and cannots more, not less, extreme."
             
         - Better help guides, UI design, etc, can make the separation go away.
             
-            _In reply I often summarize "Good UI is intuitive, but intuition comes from subconscious learning by repeated exposure to a pattern. When we are offering more power than most users even realize can exist, there is no intuition to use, and hence no good UI---until people become accustomed to whatever UI we make and start to develop an "intuitive" expectation for that design." It's not a perfect response, but it does the job._
+            {.aside} In reply I often summarize "Good UI is intuitive, but intuition comes from subconscious learning by repeated exposure to a pattern. When we are offering more power than most users even realize can exist, there is no intuition to use, and hence no good UI---until people become accustomed to whatever UI we make and start to develop an "intuitive" expectation for that design." It's not a perfect response, but it does the job.
     
 
 [^webconsole]:
